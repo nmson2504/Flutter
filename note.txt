@@ -1,1 +1,5 @@
-tim file, project lien quan hoc ngon ngu dart dua vao day
+tới https://dart.dev/language/branches
+
+xem từ https://dart.dev/language/branches song song voi video
+
+Hết branch - control flow quay lại data type - kiểu list, array....
