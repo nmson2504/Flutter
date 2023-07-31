@@ -1,5 +1,6 @@
-tới https://dart.dev/language/branches
+tới https://dart.dev/language/collections
 
-xem từ https://dart.dev/language/branches song song voi video
+xem  song song voi video https://www.youtube.com/watch?v=nqfFRTZrmek&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=13
 
-Hết branch - control flow quay lại data type - kiểu list, array....
+thuc hanh trong dart_application_1/bin/01_data_type_02.dart
+đã xong List

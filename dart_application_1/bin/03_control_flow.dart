@@ -1,3 +1,5 @@
+import '../lib/dart_application_1.dart';
+
 void main() {
 // COLTROL FLOW
 // for loop
@@ -12,6 +14,12 @@ void main() {
     callbacks.add(i);
   }
   print('callbacks: ${callbacks}');
+
+  //
+  List arr = [1, 10, 'a', 123, 30, 'b', 'df', 89, 'nms'];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] is num) print('arr[$i]: ${arr[i]}');
+  }
 
 // for - in
 /* Vòng lặp for...in trong Dart được sử dụng khi bạn muốn lặp qua tất cả các phần tử của một tập hợp (collection) cụ thể, chẳng hạn như List, Set, Map hoặc Iterable. Vòng lặp này thường dùng để duyệt qua các phần tử một cách đơn giản và dễ đọc hơn so với việc sử dụng các chỉ số như vòng lặp for thông thường. */
@@ -109,4 +117,71 @@ void main() {
     }
     print("List - Item: $item, Type: ${item.runtimeType}");
   }
+
+// If
+/* Dart supports if statements with optional else clauses. The condition in parentheses after if must be an expression that evaluates to a boolean: */
+  int age = 25;
+  if (age < 30) {
+    print('tuoi ban < 30');
+  }
+  //
+  if (age >= 18) {
+    print("Bạn đã đủ tuổi để bỏ phiếu.");
+  } else {
+    print("Bạn chưa đủ tuổi để bỏ phiếu.");
+  }
+
+// if lồng if
+  if (age >= 18) {
+    print('đủ tuổi thành niên.');
+  } else if (age < 50 && age >= 18) {
+    print('trung nien');
+  }
+//
+  var diem = 9;
+  if (diem < 5) {
+    print('yếu.');
+  } else if (diem >= 5 && diem < 7) {
+    print('trun bình');
+  } else if (diem >= 7 && diem < 9) {
+    print('khá.');
+  } else {
+    print('giỏi!');
+  }
+
+  // clear(); //import '../lib/dart_application_1.dart';
+// Switch statements
+  age = 20;
+  String status;
+  switch (age) {
+    case 18:
+      status = "Bạn đã đủ tuổi bầu cử.";
+    case > 18:
+      status = "Bạn đã đủ tuổi uống rượu.";
+    default:
+      if (age > 21) {
+        status = "Bạn đã đủ tuổi làm mọi thứ.";
+      } else {
+        status = "Bạn chưa đủ tuổi làm mọi thứ.";
+      }
+  }
+  print(status);
+  // với keyword 'break' - ko co break vẫn dừng lại tại case match. Tại sao???
+  int day = 1;
+  String dayName;
+  switch (day) {
+    case 1:
+      dayName = "Thứ Hai";
+    //  break;
+    case 2:
+      dayName = "Thứ Ba";
+    // break;
+    case 3:
+      dayName = "Thứ Tư";
+    //  break;
+    default:
+      dayName = "Không xác định";
+    //  break;
+  }
+  print(dayName);
 }

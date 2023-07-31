@@ -83,7 +83,7 @@ void main() {
   print("\x1B[2J\x1B[0;0H"); // clear entire screen, move cursor to 0;0
   print("-------------VAR------------"); // just to show where the cursor is
 //
-// CÁC KEYWORDS VAR
+// CÁC KEYWORDS VAR - DYNAMIC
 /* từ khóa "var" được sử dụng để khai báo biến mà không cần chỉ định kiểu dữ liệu của biến tại thời điểm khai báo. Thay vào đó, kiểu dữ liệu của biến được suy luận tự động dựa trên giá trị được gán cho biến.
 Lưu ý rằng một biến được khai báo bằng "var" sẽ có kiểu dữ liệu được xác định tại thời điểm gán giá trị ban đầu và sẽ không thay đổi sau đó. Nếu bạn cần thay đổi kiểu dữ liệu của biến sau khi đã khai báo, bạn cần tạo một biến mới hoặc sử dụng từ khóa "dynamic". */
   var x = 123;
@@ -146,4 +146,5 @@ https://linhta.dev/blog/final-va-const-trong-dart/#:~:text=const%20phải%20có%
   */
 
 // Lưu ý: .runtimeType sẽ return kết quả khác nhau trên các môi trường desktop và web
+// https://dart.dev/guides/language/numbers
 }
