@@ -4,3 +4,48 @@ xem  song song voi video https://www.youtube.com/watch?v=nqfFRTZrmek&list=PL3Ob3
 
 thuc hanh trong dart_application_1/bin/01_data_type_02.dart
 đã xong List
+------------------------------
+Các method test
+
+print(list_1.length);
+  print(list_1.first);
+  print(list_1.last);
+  // kiểm tra
+  print('-------kiem tra------');
+  print(list_1);
+  print(list_1.isEmpty);
+  print(list_1.isNotEmpty);
+  // any - tồn tại ít nhất 1 element thoã
+  print(list_1.any(
+    (element) => element > 10,
+  ));
+
+  print(list_1.any(
+    (element) => element < 10,
+  ));
+// every - all element thoã
+  print(list_1.every((element) => element >= 9));
+  print(list_1.every((element) => element <= 9));
+  print('-------ttt------');
+  print(list_1);
+  print(list_1.contains(100)); // kiểm tra x có tồn tại hay ko
+  print(list_1.contains(30));
+
+  // lọc ra list con
+  List<int> list_2 = [];
+  // lọc theo điều kiện
+  list_2 = list_1.where((element) => element > 20).toList();
+  print('list_2: ${list_2}');
+  // cắt từ index x đến index y
+  list_2 = list_1.sublist(2);
+  print('list_2: ${list_2}');
+
+  // reverse - đảo ngược list
+  list_1.reversed;
+  print('list_1.reversed: ${list_1.reversed}');
+
+  // sort
+  list_1.sort(); // xếp tăng dần
+  print(list_1);
+  list_1.sort((a, b) => b.compareTo(a)); // xếp giảm dần
+  print(list_1);

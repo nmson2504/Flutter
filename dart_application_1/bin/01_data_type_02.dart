@@ -32,7 +32,9 @@ Map: Used to read elements using a key. */
   // Add list b vào list a
   var list_a = [2, 4, 6, 8];
   var list_b = [1, 3, 5, 7];
-  list_a.addAll(list_b); // list_b nối vào sau list_a
+  list_a.addAll(
+      list_b); // list_b nối vào sau list_a tham số là object Iterable, ko nhận giá trị trực tiếp
+  //* mặc định method .addAll nhận vào
   print('list_a: ${list_a}');
 
   // Delete
@@ -107,6 +109,94 @@ Map: Used to read elements using a key. */
   list_1.sort((a, b) => b.compareTo(a)); // xếp giảm dần
   print(list_1);
 
+  //------------------------
+  //Sets
+// A set in Dart is an unordered collection of unique items
+//Lưu ý rằng tập hợp (set) trong Dart là một tập hợp các phần tử không có thứ tự và không chứa các phần tử trùng lặp. Điều này có nghĩa là, nếu bạn thêm một phần tử đã tồn tại vào tập hợp, nó sẽ không thêm vào lần thứ hai.
+  print('-------SET------');
+// Khai báo set rỗng
+  var emptySet = <String>{};
+  var emptySet_1 = Set<String>();
+  print('emptySet_1: ${emptySet_1}');
+  Set<int> numbers_a = {};
+  print('numbers_a: ${numbers_a}');
+
+  // Khai báo và khởi tạo value luôn
+  var stringSet = <String>{'mot', 'hai', 'ba'};
+  print('stringSet: ${stringSet}');
+  var stringSet_1 = Set<String>()..addAll(['apple', 'banana', 'orange']);
+  print('stringSet_1: ${stringSet_1}');
+  var stringSet_2 = Set<String>.from(['táo', 'chuối', 'cam']);
+  print('stringSet_2: ${stringSet_2}');
+  Set<int> numbers_k = {10, 7, 9, 23};
+  print('numbers_k: ${numbers_k}');
+  // Khai báo Set bằng cú pháp Set literals:
+  // Luu ý:
+  // Cú pháp var ten_bien = {} sẽ return về 1 cấu trúc Map rỗng chứ ko phải là Set
+  var halogens = {'fluorine', 'chlorine', 'bromine', 'iodine', 'astatine'};
+  print('halogens: ${halogens}');
+
+  // Add
+  var set_k = {'no', 'mo', 'son'};
+  set_k.add('bon');
+  print('set_k.add(): ${set_k}');
+  /* Trong Dart, Set không hỗ trợ việc chèn phần tử vào một vị trí cụ thể (index) như List. Set là một tập hợp các phần tử không có thứ tự và không chứa các phần tử trùng lặp, vì vậy không có khái niệm vị trí (index) trong Set */
+  // Nối 2 set với nhau
+  var set_a = {'no', 'mo', 'son'};
+  set_a.addAll(halogens); // phải cùng data type
+  print('set_a.addAll(halogens): ${set_a}');
+// add range qua object Iterable
+  Set<int> numbers_m = {10, 7, 9, 23};
+  Set<int> numbers_n = {10, 71, 19, 523};
+  numbers_m.addAll(numbers_n);
+  print('numbers_m.addAll(numbers_n): ${numbers_m}');
+// add range trực tiếp
+  set_a.addAll(["Carol", "Maven", "Shasha"]);
+  print('set_a.addAll(["Carol", "Maven", "Shasha"]);: ${set_a}');
+  numbers_n.addAll([50, 30, 78]);
+  print('numbers_n.addAll([50, 30, 78]);: ${numbers_n}');
+
+  // Read
+  print('-----------------------Set - read--------------');
+  print('numbers_n: ${numbers_n}');
+  print('numbers_n.first: ${numbers_n.first}');
+  print('numbers_n.last: ${numbers_n.last}');
+
+  var kq;
+  kq = numbers_n.elementAt(
+      3); // *Tuy ko insert qua index được nhưng Set vẫn dùng được index với method .elementAt
+  print('kq: ${kq}');
+
+  kq = numbers_n.firstWhere((element) => element == 50); // lọc theo điều kiện
+  print(' numbers_n.firstWhere: ${kq}');
+
+  // Edit
+  /* giá trị của các phần tử trong Set không thể thay đổi trực tiếp. Set là một tập hợp (collection) không có thứ tự và không chứa các phần tử trùng lặp. Khi một phần tử đã được thêm vào Set, bạn không thể thay đổi giá trị của nó mà phải xóa phần tử cũ và thêm một phần tử mới có giá trị mới vào Set */
+  var fruits1 = {'apple', 'banana', 'orange', 'mot', 'hai'};
+  print('Set ban đầu: $fruits1');
+  fruits1.remove('banana'); // Xóa phần tử cũ 'banana'
+  fruits1.add('grape'); // Thêm phần tử mới 'grape' có giá trị mới vào Set
+  print('Set sau khi cập nhật: $fruits1');
+
+  fruits1.remove(fruits1.elementAt(1));
+  fruits1.add('ABC'); // Thêm phần tử mới 'ABC' có giá trị mới vào Set
+  print('fruits1.add(\'ABC\'): ${fruits1}');
+
+  // Delete
+  var fruits2 = {'apple', 'banana', 'orange'};
+  print('Set ban đầu: $fruits2');
+  fruits2.remove('banana'); // Xóa phần tử chỉ định 'banana'
+  print('Set sau khi delete \'banana\': $fruits2');
+  fruits2.remove(fruits2.elementAt(1)); // xoá qua index chỉ định
+  print('Set sau khi delete elementAt(1): $fruits2');
+
+  var set_s = {'no', 'mo', 'son', 'ko', 'lo', 'to', 'em'};
+  set_s.removeAll({'no', 'em'});
+  print('set_s.removeAll: ${set_s}'); // delete range
+  set_s.clear();
+  print(' set_s.clear(): ${set_s}');
+
+//--------------------------------------
 // Enumerated types
 // Enumerated types, often called enumerations or enums, are a special kind of class used to represent a fixed number of constant values.
   print('-------Enumerated------');
