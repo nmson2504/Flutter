@@ -1,4 +1,3 @@
-enum Person { son, minh, hung }
 
 void main() {
 // Collections
@@ -34,8 +33,10 @@ Map: Used to read elements using a key. */
   var list_b = [1, 3, 5, 7];
   list_a.addAll(
       list_b); // list_b nối vào sau list_a tham số là object Iterable, ko nhận giá trị trực tiếp
-  //* mặc định method .addAll nhận vào
-  print('list_a: ${list_a}');
+  // .addAll nhận vào kiểu Iterable nên để truyền vào 1 list trực tiếp phải đặt trong []
+  print('list_a: $list_a');
+  list_a.addAll([22, 77]);
+  print('list_a.addAll([22, 77]): $list_a');
 
   // Delete
   print('-------Delete------');
@@ -64,6 +65,8 @@ Map: Used to read elements using a key. */
   list_1.add(9);
   list_1.add(90);
   list_1.add(9);
+  list_1.add(0);
+  list_1.add(-7);
   list_1[0] = 100;
   // Một số method liên quan
   print(list_1.length);
@@ -93,8 +96,17 @@ Map: Used to read elements using a key. */
   // lọc ra list con
   List<int> list_2 = [];
   // lọc theo điều kiện
+  print('list_1: ${list_1}');
   list_2 = list_1.where((element) => element > 20).toList();
   print('list_2: ${list_2}');
+  list_2 = list_1
+      .where((element) => element > 20 || element < 10)
+      .toList(); // kết hợp điều kiện
+  print('list_2 kết hợp ||: ${list_2}');
+  list_2 = list_1.where((element) => element.isEven).toList();
+  print('list_2 - element.isEven: ${list_2}');
+  list_2 = list_1.where((element) => element.isNegative).toList();
+  print('list_2 - element.isNegative: ${list_2}');
   // cắt từ index x đến index y
   list_2 = list_1.sublist(2);
   print('list_2: ${list_2}');
@@ -183,23 +195,71 @@ Map: Used to read elements using a key. */
   print('fruits1.add(\'ABC\'): ${fruits1}');
 
   // Delete
-  var fruits2 = {'apple', 'banana', 'orange'};
+  var fruits2 = {
+    'apple',
+    'banana',
+    'orange',
+    'water mellon',
+    'cherry',
+    'orchil'
+  };
   print('Set ban đầu: $fruits2');
   fruits2.remove('banana'); // Xóa phần tử chỉ định 'banana'
   print('Set sau khi delete \'banana\': $fruits2');
   fruits2.remove(fruits2.elementAt(1)); // xoá qua index chỉ định
   print('Set sau khi delete elementAt(1): $fruits2');
+  fruits2.clear(); // delete all
+  print(' fruits2.clear(): ${fruits2}');
 
   var set_s = {'no', 'mo', 'son', 'ko', 'lo', 'to', 'em'};
-  set_s.removeAll({'no', 'em'});
-  print('set_s.removeAll: ${set_s}'); // delete range
-  set_s.clear();
-  print(' set_s.clear(): ${set_s}');
+  set_s.removeAll({'no', 'em'}); // delete range
+  print('set_s.removeAll: ${set_s}');
+
+  // Kiểm tra
+  print('\n-----------------------Set - kiem tra--------------');
+  print(set_s.any((element) => element == 'mo'));
+  print(set_s.every((element) => element == 'mo'));
+  print(set_s.contains('lo'));
+  print(set_s.containsAll(
+      {'lo', 'to'})); // tham số là kiểu Iterable nên phải đặt trong {}
+
+  // lọc ra set con
+  print('\n-----------------------Set - lọc ra set con--------------');
+  print('set_s: ${set_s}');
+  var set_con = set_s.where((element) => element != 'mo');
+  print('set_con: ${set_con}');
+  set_con = set_s.where((element) =>
+      element != 'mo' && element != 'lo'); // kết hợp nhiều điều kiện
+  print('set_con: ${set_con}');
+
+// lọc ra elements khác biệt giữa 2 set
+  var s1 = {'a', 'b', 'c', 'd', 'e'};
+  var s2 = {'d', 'k', 'c', 'm', 'l'};
+  set_con = s1.difference(s2); // return elements in s1 && not in s2
+  print(' s1.difference(s2): $set_con');
 
 //--------------------------------------
 // Enumerated types
+//Trong Dart, enum được khai báo ở mức độ của lớp (class), hoặc trong một file riêng biệt. Khai báo enum không được đặt trong hàm hoặc phạm vi khác.
 // Enumerated types, often called enumerations or enums, are a special kind of class used to represent a fixed number of constant values.
-  print('-------Enumerated------');
+  Iterable<int> iterable = [1, 2, 3];
+  print(' Iterable<int> : ${iterable.runtimeType}');
+  Map<String, int> ages1 = {
+    "John X": 30,
+    "Alice K": 25,
+    "Bob C": 28,
+  };
+  print(' Map<String, int>: ${ages1.runtimeType}');
+  enum PersonEnum {
+  mot,
+  hai,
+  ba,
+}
+
+  var person = PersonEnum.mot;
+  print(person); // Kết quả: Person.mot
+
+  /*  print('\n-------Enumerated------');
   print(Person.hung);
   print(Person.hung.name);
   print(Person.values.length);
@@ -213,5 +273,5 @@ Map: Used to read elements using a key. */
   //
   Person.values.forEach((el) {
     print('element: ${el.name}');
-  });
+  }); */
 }
