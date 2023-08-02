@@ -1,3 +1,4 @@
+enum Person { mot, hai, ba }
 
 void main() {
 // Collections
@@ -15,9 +16,10 @@ Map: Used to read elements using a key. */
 // Khai báo mảng kiểu String
   List<String> names = ['Alice', 'Bob', 'Carol'];
 
-// Khai báo mảng không rõ kiểu dữ liệu (dynamic)
+// Khai báo mảng không rõ kiểu dữ liệu (dynamic), tương đương cú pháp List<dynamic>
   List fruits = ['Apple', 'Banana', 'Orange'];
-
+  List multi_type = ['Apple', 123, 'Orange', 40.7];
+  print('multi_type: ${multi_type}');
 // cú pháp rút gọn của List<int>
   var list_1 = [10, 20, 30];
   list_1.forEach((element) => print(element));
@@ -133,6 +135,10 @@ Map: Used to read elements using a key. */
   Set<int> numbers_a = {};
   print('numbers_a: ${numbers_a}');
 
+  Set setRong = {}; // tuong duong Set<dynamic>
+  setRong.addAll({1, 'hai', 3.0, 5.1, 'sau'});
+  print('setRong.addAll: $setRong');
+
   // Khai báo và khởi tạo value luôn
   var stringSet = <String>{'mot', 'hai', 'ba'};
   print('stringSet: ${stringSet}');
@@ -239,39 +245,142 @@ Map: Used to read elements using a key. */
   print(' s1.difference(s2): $set_con');
 
 //--------------------------------------
+  print('\n-------Iterable------');
+// Iterable
+/* Cấu trúc Iterable là một khái niệm quan trọng trong Dart, đại diện cho một tập hợp các phần tử có thể lặp lại. Điểm đặc trưng của cấu trúc Iterable là:
+
+- Lặp lại (Iterate): Cấu trúc Iterable cho phép lặp lại qua từng phần tử trong tập hợp một cách tuần tự. Bạn có thể sử dụng các vòng lặp như for hoặc forEach để duyệt qua từng phần tử.
+
+- Độc lập với cấu trúc dữ liệu: Iterable là một khái niệm trừu tượng, không thực sự đại diện cho một cấu trúc dữ liệu cụ thể. Nó có thể áp dụng cho nhiều cấu trúc dữ liệu khác nhau như List, Set, Map, hoặc các dạng dữ liệu tùy chỉnh. */
+  Iterable<int> iterable_rong = []; // tạo iterable rỗng
+  print('Iterable<int>: ${iterable_rong.runtimeType}');
+  print('iterable_rong: ${iterable_rong}');
+  Iterable<int> iterable_int = [1, 5, 7];
+  print('iterable_int: ${iterable_int}');
+
+  print('set_con.runtimeType: ${set_con.runtimeType}');
+
+  print('list_1.runtimeType: ${list_1.runtimeType}');
+
+  //----------------------------------------
+  /* Trong Dart, Map là một cấu trúc dữ liệu cho phép bạn ánh xạ các cặp giá trị (key - value). Mỗi phần tử trong Map bao gồm một key duy nhất và giá trị tương ứng. Key là một đối tượng không thay đổi và là duy nhất trong Map. */
+  print('\n---------Map--------------');
+  Map<String, int> myMap = {'apple': 10, 'cherry': 24, 'orange': 33};
+  print('myMap: ${myMap}');
+  var myMap1 = {'apple': 10, 'cherry': 24, 'orange': 13};
+  print('myMap1: ${myMap1}');
+
+  // Read
+  print(myMap1['cherry']); // tham số là key -> return value
+  // Add
+  myMap1['lemon'] = 35;
+  myMap1['lemon'] = 230; // add trùng key --> update value
+  print('myMap1[\'lemon\']=35: $myMap1');
+// addAll - nối 2 map
+/* myMap1.addAll(myMap); nối myMap vào myMap1, cũng áp dụng nguyên tắc trùng key như ở trên
+ */
+  myMap1.addAll(myMap);
+  print(' myMap1.addAll(myMap): $myMap1');
+  // Edit - add trùng key với value mới
+  // .updateAll update value trên all elements in map
+  myMap1.updateAll((key, value) => value * 2);
+  print(' myMap1.updateAll((key, value) => value*2): $myMap1');
+
+  var mapC = {1: 'Anh', 2: 'teo', 3: 'chung'};
+  mapC.updateAll((key, value) => value.toUpperCase());
+  print('mapC.updateAll((key, value) => value.toUpperCase()): $mapC');
+
+  print('-------------------------');
+  // Delete
+  myMap1.remove('apple');
+  print('myMap1.remove(\'appl\'): $myMap1');
+  myMap.clear(); // delete all
+
+  // xoá với điều kiện
+  mapC.removeWhere((key, value) => value.startsWith('A'));
+  print('mapC.removeWhere((key, value) => value.startsWith(\'A\'): $mapC');
+
+  // Các method liên quan
+  print(' myMap1.keys: ${myMap1.keys}'); // get all key
+  print(' myMap1.values: ${myMap1.values}'); // get all values
+
+// method .entries để lấy Iterable chứa các cặp key-value
+// Phương thức entries rất hữu ích khi bạn muốn duyệt qua tất cả các cặp key-value trong Map hoặc muốn thực hiện một số thao tác phức tạp liên quan đến các cặp key-value.
+// Sử dụng phương thức entries để lấy Iterable chứa các cặp key-value
+  var mapEntries = myMap1.entries;
+  // Duyệt qua Iterable và in ra các cặp key-value
+  mapEntries.forEach((entry) {
+    print('${entry.key}: ${entry.value}');
+  });
+
+// kiểm tra
+  myMap1.containsKey('cherry');
+  print('myMap1.containsKey(\'cherry\'): ${myMap1.containsKey('cherry')}');
+  myMap1.containsValue(230);
+  print('myMap1.containsValue(230): ${myMap1.containsValue(230)}');
+
+  // Duyệt map
+  myMap1.forEach((key, value) {
+    print('${key}   -   ${value}');
+  });
+//-------------------------------------
+print('\n---------Iterable------------')
+ // Iterable khai báo kiểu nào thì return về kiểu đó
+  Iterable<int> iterable = [1, 2, 3];
+  Iterable<String> myStringSet = {'apple', 'banana', 'orange'};
+  print('Iterable<String>: ${myStringSet.runtimeType}');
+  print(' Iterable<int> : ${iterable.runtimeType}');
+
+  // Kiểm tra data type với các kiểu dữ liệu
+  print('\n--------------Kiểm tra data type với các kiểu dữ liệu---------');
+/* 
+set_con.runtimeType: _Set<String>
+list_1.runtimeType: List<int>
+Iterable<String>: _Set<String> // Iterable khai báo kiểu nào thì return về kiểu đó
+Iterable<int> : List<int>
+Map<String, int>: _Map<String, int>
+ */
+// Ngoài method .runtimeType ra còn có thể dùng cú pháp ....is.... or ...is!...
+  var myVariable = 5.9;
+  if (myVariable is int) {
+    print("myVariable has type int");
+  } else {
+    print("myVariable does not have type int - is ${myVariable.runtimeType}");
+  }
+
+  if (iterable is int) {
+    print("iterable has type int");
+  } else {
+    print("iterable does not have type int - is ${iterable.runtimeType}");
+  }
+  if (myStringSet is Set<String>) {
+    print("myStringSet has type Set<String>");
+  } else {
+    print("myStringSet does not have type int - is ${myStringSet.runtimeType}");
+  }
+
+//--------------------------------------
 // Enumerated types
 //Trong Dart, enum được khai báo ở mức độ của lớp (class), hoặc trong một file riêng biệt. Khai báo enum không được đặt trong hàm hoặc phạm vi khác.
 // Enumerated types, often called enumerations or enums, are a special kind of class used to represent a fixed number of constant values.
-  Iterable<int> iterable = [1, 2, 3];
-  print(' Iterable<int> : ${iterable.runtimeType}');
-  Map<String, int> ages1 = {
-    "John X": 30,
-    "Alice K": 25,
-    "Bob C": 28,
-  };
-  print(' Map<String, int>: ${ages1.runtimeType}');
-  enum PersonEnum {
-  mot,
-  hai,
-  ba,
-}
+// enum là một kiểu dữ liệu rất cơ bản và không cho phép thêm hay sửa đổi các phần tử sau khi đã được khai báo. Enum được sử dụng để định nghĩa một tập hợp hữu hạn các giá trị hằng số (constants) và không thay đổi sau khi đã được khai báo.
 
-  var person = PersonEnum.mot;
-  print(person); // Kết quả: Person.mot
-
-  /*  print('\n-------Enumerated------');
-  print(Person.hung);
-  print(Person.hung.name);
+ 
+  print('\n-------Enumerated------');
+  print(Person.mot);
+  print(Person.hai.name);
   print(Person.values.length);
   print(Person.values.first);
   print(Person.values.last);
-  print(Person.values[0]);
+  print('Person.values[0]: ${Person.values[0]}');
   print(Person.values[Person.values.length - 1]);
-  print(Person.minh.index);
+  print(Person.ba.index);
   print(Person.values.isEmpty);
   print(Person.values.isNotEmpty);
   //
+  print('Person.values: ${Person.values}'); // print list value
+  //
   Person.values.forEach((el) {
     print('element: ${el.name}');
-  }); */
+  });
 }
