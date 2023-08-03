@@ -67,4 +67,23 @@ void main() {
   print('kq: ${kq}');
   var kq1 = var03 ?? var02;
   print('kq1: ${kq1}');
+
+// Ký hiệu .. trong Dart được gọi là Dart Cascade Notation hoặc Cascade Operator.
+// Nó là một tính năng mạnh mẽ của ngôn ngữ Dart, cho phép bạn gọi nhiều phương thức trên cùng một đối tượng mà không cần viết lại tên đối tượng nhiều lần.
+// Vd1:
+  List<dynamic> ls = [];
+  // ko dùng ..
+  ls.add(10);
+  ls.add(30);
+  // dùng ..
+  ls
+    ..add(40)
+    ..add(50);
+  print('ls: $ls');
+
+  // Vd2
+  ls
+    ..addAll([2, 4, 6, 8])
+    ..removeWhere((element) => element > 30);
+  print('ls: $ls');
 }
