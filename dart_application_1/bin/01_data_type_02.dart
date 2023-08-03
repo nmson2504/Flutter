@@ -1,12 +1,13 @@
 enum Person { mot, hai, ba }
 
 void main() {
-// Collections
+// Collections - Iterable - Enumerated
 //Dart has built-in support for list, set, and map collections. To learn more about configuring the types collections contain, check out Generics.
 /* A collection can be empty, or it can contain many elements. Depending on the purpose, collections can have different structures and implementations. These are some of the most common collection types:
 List: Used to read elements by their indexes.
 Set: Used to contain elements that can occur only once.
 Map: Used to read elements using a key. */
+
 //Lists
 //Perhaps the most common collection in nearly every programming language is the array, or ordered group of objects. In Dart, arrays are List objects, so most people just call them lists.
 // Khai báo mảng kiểu int
@@ -70,6 +71,14 @@ Map: Used to read elements using a key. */
   list_1.add(0);
   list_1.add(-7);
   list_1[0] = 100;
+// . setAll - cập nhật nhiều phần tử trong một List bằng cách thay thế các giá trị có sẵn bằng một Iterable khác.
+// Vị trí ghi đè vào chỉ định qua inđex
+  List<int> myList = [1, 2, 3, 4, 5];
+  List<int> replacement = [10, 20, 30];
+  // Thay thế các phần tử từ vị trí index = 1 bằng các giá trị mới từ Iterable replacement
+  myList.setAll(1, replacement);
+  print('myList.setAll: $myList');
+
   // Một số method liên quan
   print(list_1.length);
   print(list_1.first);
@@ -112,6 +121,13 @@ Map: Used to read elements using a key. */
   // cắt từ index x đến index y
   list_2 = list_1.sublist(2);
   print('list_2: ${list_2}');
+
+  var list_n = list_1.getRange(1, 3);
+  print(
+      'list_n ${list_n.runtimeType}: $list_n'); // retun type: SubListIterable<int>
+  /* Lưu ý rằng nếu bạn muốn tạo một bản sao (copy) của một phần của List mà không ảnh hưởng đến List ban đầu, bạn nên sử dụng phương thức sublist để tạo SubList và sau đó tạo một List mới từ SubList này bằng cách sử dụng phương thức toList.
+  SubListIterable (hay còn gọi là SubList) đại diện cho một phần của List ban đầu. SubList này chia sẻ cùng một vùng nhớ với List ban đầu, vì vậy các thay đổi trong SubList sẽ ảnh hưởng đến List ban đầu và ngược lại.
+   */
 
   // reverse - đảo ngược list
   list_1.reversed;
@@ -324,8 +340,8 @@ Map: Used to read elements using a key. */
     print('${key}   -   ${value}');
   });
 //-------------------------------------
-print('\n---------Iterable------------')
- // Iterable khai báo kiểu nào thì return về kiểu đó
+  print('\n---------Iterable------------');
+  // Iterable khai báo kiểu nào thì return về kiểu đó
   Iterable<int> iterable = [1, 2, 3];
   Iterable<String> myStringSet = {'apple', 'banana', 'orange'};
   print('Iterable<String>: ${myStringSet.runtimeType}');
@@ -365,7 +381,6 @@ Map<String, int>: _Map<String, int>
 // Enumerated types, often called enumerations or enums, are a special kind of class used to represent a fixed number of constant values.
 // enum là một kiểu dữ liệu rất cơ bản và không cho phép thêm hay sửa đổi các phần tử sau khi đã được khai báo. Enum được sử dụng để định nghĩa một tập hợp hữu hạn các giá trị hằng số (constants) và không thay đổi sau khi đã được khai báo.
 
- 
   print('\n-------Enumerated------');
   print(Person.mot);
   print(Person.hai.name);
