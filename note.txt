@@ -1,6 +1,7 @@
 tới https://api.dart.dev/stable/3.0.7/dart-collection/Queue-class.html
 
-xem  song song voi video https://www.youtube.com/watch?v=eloGGkBL_4c&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=17
+xem  song song voi video 
+https://www.youtube.com/watch?v=N1SsMLNq_mI&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=19
 
 thuc hanh trong dart_application_1/bin/01_data_type_03.dart
 đã xong List
