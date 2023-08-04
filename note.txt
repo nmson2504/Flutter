@@ -1,7 +1,9 @@
-tới https://api.dart.dev/stable/3.0.7/dart-collection/Queue-class.html
+tới class: extend - abstract - super - override
 
 xem  song song voi video 
-https://www.youtube.com/watch?v=id3ovAluLaY&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=24
+https://www.youtube.com/watch?v=mL1EKecMkjU&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=25
 
 
-thuc hanh trong dart_application_1/bin/01_data_type_03.dart
+thuc hanh trong dart_application_1\bin\05_class_02.dart
+
+tới abstract

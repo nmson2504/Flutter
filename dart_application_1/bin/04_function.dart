@@ -82,3 +82,28 @@ void greet({String name = 'Guess', int age = 0}) {
 void printPersonInfo({required String name, required int age}) {
   print("Name: $name, Age: $age");
 }
+
+// class demo cho file .05_class_01.dart,...
+class MyClassC {
+  int publicVariable = 10; // Thuộc tính public
+  int _privateVariable =
+      20; // Thuộc tính private, bắt đầu bằng dấu gạch dưới (_)
+
+  int get privateVariable =>
+      _privateVariable; // Getter public cho thuộc tính private
+
+  set privateVariable(int value) {
+    _privateVariable = value;
+  }
+
+  void publicMethod() {
+    // Phương thức public
+    print("This is a public method.");
+    _privateMethod();
+  }
+
+  void _privateMethod() {
+    // Phương thức private
+    print("This is a private method.");
+  }
+}
