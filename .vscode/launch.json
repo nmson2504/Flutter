@@ -9,6 +9,7 @@
             "type": "dart",
             "request": "launch",
             "program": "bin/main.dart"
+          
         },
 
         {
@@ -16,6 +17,7 @@
             "cwd": "dart_application_1",
             "request": "launch",
             "type": "dart"
+          //  "console":"terminal"
         }
     ]
 }

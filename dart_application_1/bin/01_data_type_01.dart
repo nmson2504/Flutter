@@ -114,6 +114,7 @@ Non-nullable (không thể null): Được ký hiệu bằng dấu Type, như in
 Nullable (có thể null): Được ký hiệu bằng dấu Type?, như int?, double?, String?, ... Với loại biến này, bạn có thể gán giá trị null hoặc giá trị của kiểu tương ứng vào biến.
 Khi sử dụng Null safety, bạn cần kiểm tra và xử lý các biến có thể null để tránh những lỗi liên quan đến null. Điều này được thực hiện thông qua hai toán tử mới là ! và ?.
 !: Toán tử kiểm tra null ("null assertion operator"). Nếu bạn chắc chắn biến không null, bạn có thể sử dụng toán tử ! để bỏ qua cảnh báo của Dart và truy cập vào giá trị của biến.
+(Nếu ! là tiền tố của tên biến - !ten_bien: phủ định giá trị biến)
 ?: Toán tử kiểm tra null ("null check operator"). Bạn sử dụng toán tử ? để kiểm tra xem biến có null hay không trước khi truy cập vào nó. */
   // Dùng khai báo biến Nullable (có thể null)
   int? num1;
