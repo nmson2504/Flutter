@@ -7,3 +7,4 @@ https://www.youtube.com/watch?v=NyhnspwSgow&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-P
 thuc hanh trong dart_application_1\bin\05_class_02.dart
 
 tới mixin
+https://xuanthulab.net/tim-hieu-cac-cau-truc-du-lieu-trong-dart.html

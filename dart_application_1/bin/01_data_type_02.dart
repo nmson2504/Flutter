@@ -1,5 +1,10 @@
 enum Person { mot, hai, ba }
 
+void clearScreen() {
+  print("\x1B[2J\x1B[0;0H"); // clear entire screen, move cursor to 0;0
+  print("-------------------------"); // just to show where the cursor is
+}
+
 void main() {
 // Collections - Iterable - Enumerated
 //Dart has built-in support for list, set, and map collections. To learn more about configuring the types collections contain, check out Generics.
@@ -260,7 +265,11 @@ Map: Used to read elements using a key. */
   set_con = s1.difference(s2); // return elements in s1 && not in s2
   print(' s1.difference(s2): $set_con');
 
+  print('set_con.runtimeType: ${set_con.runtimeType}');
+
+  print('list_1.runtimeType: ${list_1.runtimeType}');
 //--------------------------------------
+  clearScreen();
   print('\n-------Iterable------');
 // Iterable
 /* Cấu trúc Iterable là một khái niệm quan trọng trong Dart, đại diện cho một tập hợp các phần tử có thể lặp lại. Điểm đặc trưng của cấu trúc Iterable là:
@@ -274,9 +283,13 @@ Map: Used to read elements using a key. */
   Iterable<int> iterable_int = [1, 5, 7];
   print('iterable_int: ${iterable_int}');
 
-  print('set_con.runtimeType: ${set_con.runtimeType}');
+  // Phát sinh data
+  var itel = Iterable.generate(10);
+  itel.forEach(print); // cú pháp rút gọn
 
-  print('list_1.runtimeType: ${list_1.runtimeType}');
+  print('itel.first: ${itel.first}');
+  print('itel.first: ${itel.last}');
+  print('itel.first: ${itel.elementAt(5)}');
 
   //----------------------------------------
   /* Trong Dart, Map là một cấu trúc dữ liệu cho phép bạn ánh xạ các cặp giá trị (key - value). Mỗi phần tử trong Map bao gồm một key duy nhất và giá trị tương ứng. Key là một đối tượng không thay đổi và là duy nhất trong Map. */
@@ -394,6 +407,7 @@ Map<String, int>: _Map<String, int>
   print(Person.values.isNotEmpty);
   //
   print('Person.values: ${Person.values}'); // print list value
+  //
   //
   Person.values.forEach((el) {
     print('element: ${el.name}');
