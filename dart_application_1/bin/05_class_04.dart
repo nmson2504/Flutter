@@ -15,6 +15,10 @@ void clearScreen() {
 Trong Dart, không hỗ trợ đa kế thừa (multiple inheritance) như một số ngôn ngữ khác như C++. Một class chỉ có thể kế thừa từ một class duy nhất. Điều này giúp tránh các vấn đề liên quan đến sự xung đột và không rõ ràng khi một phương thức hoặc thuộc tính nằm trong nhiều class cha khác nhau.
 
 Tuy nhiên, Dart hỗ trợ kế thừa từ nhiều interfaces (interface inheritance). Điều này cho phép một class có thể triển khai nhiều interface và chia sẻ các hành vi từ nhiều nguồn khác nhau. Điều này giúp giải quyết nhu cầu sử dụng các hành vi chung mà không phải kế thừa toàn bộ các thông tin từ một lớp cha duy nhất.
+
+Phương thức trong interface: Tuy thực tế các phương thức trong interface có thể có or ko có body, có thể khai báo properties nhưng để tường minh ko làm rối rắm code ta nên tuân thủ các nguyên tắc chung khi khai báo:
+- Định nghĩa interface: Để định nghĩa một interface, bạn sử dụng từ khóa abstract class. Các phương thức trong interface không có phần thân, chỉ có chữ ký (tên và tham số).
+- Triển khai interface: Để triển khai một interface trong một class, sử dụng từ khóa implements. Class này phải cung cấp định nghĩa cho tất cả các phương thức được khai báo trong interface. Lưu ý rằng class có thể triển khai nhiều interface cùng một lúc.
 */
 
 abstract class Shape {

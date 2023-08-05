@@ -17,10 +17,12 @@ Abstract class cho phép bạn định nghĩa một giao diện chung cho các l
 Abstract class hữu ích trong việc xây dựng các hệ thống phức tạp hoặc để triển khai các phương thức chung cho một nhóm lớp con liên quan đến nhau.
 Dưới đây là một số nguyên tắc khi sử dụng abstract class trong Dart:
 1- Sử dụng từ khóa "abstract" để khai báo một abstract class
-Abstract class cũng có thể triển khai method luôn nếu muốn - các method đã implement rồi sẽ ko bắt buộc @override lại ở subclass
-Abstract class cũng có thể có propeties
+Abstract class cũng có thể triển khai method luôn nếu muốn
+(class thường khi đã định nghĩa method thì bắt buộc phải setup body luôn, ko được bỏ trống)
+Abstract class cũng có thể có propeties - subclass có thể @override hoặc ko
 
-2- Lớp con extends abstract class và phải triển khai tất cả các phương thức abstract của lớp cha:
+
+2- Lớp con extends abstract class và phải triển khai TẤT CẢ các phương thức abstract của lớp cha (method đã có body có thể ko @override)
 
 3- Một lớp con có thể là một abstract class, nếu nó không triển khai tất cả các phương thức abstract của lớp cha:
 
@@ -32,6 +34,8 @@ abstract class Shape {
   int tong(int a, int b) {
     return a + b;
   }
+
+  int k = 10;
 }
 
 class Circle extends Shape {

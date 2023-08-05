@@ -131,7 +131,7 @@ Khi sử dụng Null safety, bạn cần kiểm tra và xử lý các biến có
 // Sử dụng null check operator
   nullableValue = null;
   print(nullableValue
-      ?.toString()); // Nếu nullableValue != null, in ra giá trị sau khi chuyển sang chuỗi. Nếu nullableValue == null, không làm gì cả.
+      ?.toString()); // Nếu nullableValue != null --> chuyển sang chuỗi và in ra. Nếu nullableValue == null, không làm gì cả.
 
 // Gán giá trị cho biến nullable
   nullableValue = 10;
@@ -143,7 +143,7 @@ Khi sử dụng từ khoá late, bạn cam kết rằng biến sẽ được gá
 Lưu ý rằng bạn cần chắc chắn rằng bạn đã gán giá trị cho biến late trước khi truy cập vào nó, nếu không, chương trình sẽ gây ra lỗi. Sử dụng từ khoá late khi bạn có đảm bảo rằng biến sẽ được khởi tạo trước khi sử dụng có thể giúp bạn quản lý tốt hơn và tạo mã sạch hơn trong Dart. */
 
 /* FINAL and CONST
-https://linhta.dev/blog/final-va-const-trong-dart/#:~:text=const%20phải%20có%20giá%20trị,trị%20với%20object%20ban%20đầu.
+https://linhta.dev/blog/final-va-const-trong-dart/#:~:text=const%20phải%20có%20giá%20trị,trị%20với%20object%20ban%20đầu.  
   */
 
 // Lưu ý: .runtimeType sẽ return kết quả khác nhau trên các môi trường desktop và web

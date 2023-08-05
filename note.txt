@@ -1,9 +1,9 @@
-tới class: extend - abstract - super - override
+https://dart.dev/language/mixins
 
 xem  song song voi video 
-https://www.youtube.com/watch?v=mL1EKecMkjU&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=25
+https://www.youtube.com/watch?v=NyhnspwSgow&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=27
 
 
 thuc hanh trong dart_application_1\bin\05_class_02.dart
 
-tới abstract
+tới mixin
