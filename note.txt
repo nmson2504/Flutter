@@ -1,10 +1,10 @@
 https://dart.dev/language/mixins
 
 xem  song song voi video 
-https://www.youtube.com/watch?v=NyhnspwSgow&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=27
+https://www.youtube.com/watch?v=V4t-6A5peA8&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=29
 
 
 thuc hanh trong dart_application_1\bin\05_class_02.dart
 
 tới mixin
-https://xuanthulab.net/tim-hieu-cac-cau-truc-du-lieu-trong-dart.html
+

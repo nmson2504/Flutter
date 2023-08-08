@@ -63,12 +63,15 @@ class Animal5 {
   void pMy(name) => print('Animal15 - name: $name');
 }
 
+/*  
+khi một class con kế thừa từ một superclass mà superclass có constructor chứa tham số, thì class con cần phải cung cấp các tham số tương ứng cho constructor của superclass đó khi định nghĩa class. nếu ko tuân thủ sẽ báo lỗi "The implicitly invoked unnamed constructor from 'superclass_name' has required parameters."
+ */
 class Dog5 extends Animal5 {
   String breed;
 
   Dog5(String name, this.breed)
       : super(
-            2); // subclass truyền tham số lên cho superclass bằng value/variable qua hàm constructor
+            2); // subclass truyền tham số lên cho superclass bằng value/variable qua hàm constructor (bắt buộc vì constructor trong superclass có tham số)
 
   void pS() => print('-----------Dog5 Start---------');
 

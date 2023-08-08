@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dart_application_1/demo_class/class_01.dart';
 
 import '04_function.dart';
@@ -150,7 +152,26 @@ class MyClass {
   }
 }
 
+/* Phương thức tĩnh
+Các phương thức (hàm) trong lớp chỉ truy cập được trên một đối tượng cụ thể triển khai từ lớp, nhưng bạn có thể chỉ định phương thức là tĩnh bằng từ khóa static, thì hàm không cần đối tượng triển khai từ lớp để hoạt động mà có thể gọi hàm đó thông qua tên lớp.
+ClassName.staticMethod();
+  */
+class csTest {
+  void publicM() {
+    print('publicM..........');
+  }
+
+  static void staticMethod() {
+    print('staticMethod---------');
+  }
+}
+
 void main() {
+  // static method
+  csTest objA = csTest();
+  objA.publicM();
+  csTest.staticMethod();
+  //
   Person person_1 = Person('nmson', 90);
   person_1.sayHello();
   person_1.celebrateBirthday();
@@ -172,7 +193,6 @@ void main() {
   Person_c person2 = Person_c.guest();
   person2.sayHello(); // Kết quả: "Hello, my name is Guest. I am 0 years old."
 
-  clearScreen();
   // Phạm vi truy cập
   MyClass myClass = MyClass();
   myClass._privateMethod();
