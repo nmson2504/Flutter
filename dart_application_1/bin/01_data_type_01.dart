@@ -144,6 +144,8 @@ Lưu ý rằng bạn cần chắc chắn rằng bạn đã gán giá trị cho b
 
 /* FINAL and CONST
 https://linhta.dev/blog/final-va-const-trong-dart/#:~:text=const%20phải%20có%20giá%20trị,trị%20với%20object%20ban%20đầu.  
+
+https://www.youtube.com/watch?v=V4t-6A5peA8&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-Pr6T&index=30
   */
 
 // Lưu ý: .runtimeType sẽ return kết quả khác nhau trên các môi trường desktop và web

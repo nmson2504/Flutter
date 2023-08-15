@@ -114,6 +114,7 @@ Map: Used to read elements using a key. */
   // lọc theo điều kiện
   print('list_1: ${list_1}');
   list_2 = list_1.where((element) => element > 20).toList();
+
   print('list_2: ${list_2}');
   list_2 = list_1
       .where((element) => element > 20 || element < 10)
@@ -123,6 +124,28 @@ Map: Used to read elements using a key. */
   print('list_2 - element.isEven: ${list_2}');
   list_2 = list_1.where((element) => element.isNegative).toList();
   print('list_2 - element.isNegative: ${list_2}');
+
+// .contains - kiểu String
+  List<String> listString = [
+    'Apple',
+    'Banana',
+    'Orange',
+    'Apple',
+    'Banana',
+    'Orange',
+    'Cao',
+    'Minh'
+  ];
+  List<String> listString_Con = [];
+  listString_Con = listString
+      .where((element) => element.contains('Apple'))
+      .toList(); // có chứa 'abc'
+  print('listString_Con: ${listString_Con}');
+  listString_Con = listString
+      .where((element) => !element.contains('Apple'))
+      .toList(); // ko chứa 'abc'
+  print('listString_Con_Not: ${listString_Con}');
+
   // cắt từ index x đến index y
   list_2 = list_1.sublist(2);
   print('list_2: ${list_2}');
@@ -269,7 +292,7 @@ Map: Used to read elements using a key. */
 
   print('list_1.runtimeType: ${list_1.runtimeType}');
 //--------------------------------------
-  clearScreen();
+  //clearScreen();
   print('\n-------Iterable------');
 // Iterable
 /* Cấu trúc Iterable là một khái niệm quan trọng trong Dart, đại diện cho một tập hợp các phần tử có thể lặp lại. Điểm đặc trưng của cấu trúc Iterable là:
