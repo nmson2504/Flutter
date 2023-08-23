@@ -125,7 +125,7 @@ Map: Used to read elements using a key. */
   list_2 = list_1.where((element) => element.isNegative).toList();
   print('list_2 - element.isNegative: ${list_2}');
 
-// .contains - kiểu String
+// .contains - kiểu String - có 1 số method khác với kiểu Int
   List<String> listString = [
     'Apple',
     'Banana',
@@ -138,7 +138,8 @@ Map: Used to read elements using a key. */
   ];
   List<String> listString_Con = [];
   listString_Con = listString
-      .where((element) => element.contains('Apple'))
+      .where(
+          (element) => element.contains('Apple') || element.contains('Banana'))
       .toList(); // có chứa 'abc'
   print('listString_Con: ${listString_Con}');
   listString_Con = listString
