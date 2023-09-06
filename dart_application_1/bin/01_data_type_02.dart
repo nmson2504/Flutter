@@ -420,7 +420,8 @@ Map<String, int>: _Map<String, int>
 
   print('\n-------Enumerated------');
   print(Person.mot);
-  print(Person.hai.name);
+  print(Person.hai
+      .name); //The name is a string containing the source identifier used to declare the enum value - MyEnum.value1.name is the string "value1".
   print(Person.values.length);
   print(Person.values.first);
   print(Person.values.last);
