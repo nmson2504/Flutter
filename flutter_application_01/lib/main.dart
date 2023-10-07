@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_01/navigation.dart';
+
+import 'dialog_getvalue.dart';
 
 void main() {
   // changes app in this
   // runApp(const MyMenuAnchor());
-  runApp(const MyNavigation());
+  runApp(const MyDialogGetValue());
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }
 
