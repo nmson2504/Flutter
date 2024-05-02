@@ -9,13 +9,13 @@ void main() {
                 backgroundColor: Colors.blue,
                 title: const Text('My App 001'),
               ),
-              body: Center(child: MyWidgetFul(true))))));
+              body: const Center(child: MyWidgetFul(true))))));
 }
 
 // StatelessWidget
 class MyWidgetLes extends StatelessWidget {
   final bool load_state;
-  const MyWidgetLes(this.load_state);
+  const MyWidgetLes(this.load_state, {super.key});
   @override
   Widget build(BuildContext context) {
     return load_state
@@ -27,7 +27,7 @@ class MyWidgetLes extends StatelessWidget {
 // StatefulWidget
 class MyWidgetFul extends StatefulWidget {
   final bool loading;
-  const MyWidgetFul(this.loading);
+  const MyWidgetFul(this.loading, {super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -46,7 +46,7 @@ class MyWidgetFul_state extends State<MyWidgetFul> {
   @override
   Widget build(BuildContext context) {
     return _local_load_state
-        ? Text('StatefulWidget')
-        : CircularProgressIndicator();
+        ? const Text('StatefulWidget')
+        : const CircularProgressIndicator();
   }
 }

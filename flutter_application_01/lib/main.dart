@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
-
-import 'dialog_getvalue.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter_application_01/drawer.dart';
+import 'package:flutter_application_01/gesture.dart';
+import 'navigation.dart';
+import 'package:flutter_application_01/dismissible.dart';
+import 'linearprogress.dart';
+import 'circularprogress.dart';
 
 void main() {
+  debugPrintGestureArenaDiagnostics = true;
   // changes app in this
   // runApp(const MyMenuAnchor());
-  runApp(const MyDialogGetValue());
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  //   DeviceOrientation.landscapeLeft,
+  //   DeviceOrientation.landscapeRight
+  // ]);
+  runApp(const MyCircularProgress());
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }
 

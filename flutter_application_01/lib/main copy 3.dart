@@ -18,6 +18,6 @@ void main() {
               appBar: AppBar(
                   backgroundColor: Colors.blue,
                   title: const Text('Text widget')),
-              body:
-                  Center(child: Text('MaterialApp - SafeArea - Scaffold'))))));
+              body: const Center(
+                  child: Text('MaterialApp - SafeArea - Scaffold'))))));
 }

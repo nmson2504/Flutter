@@ -5,7 +5,7 @@ class MyNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Navigator6b();
+    return const Navigator1();
   }
 }
 
@@ -58,7 +58,9 @@ class SecondRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Second 1 Screen'),
+        automaticallyImplyLeading:
+            true, // ẩn nút back trên appbar. If leading widget is not null, this parameter has no effect.
+        title: const Text('SecondRoute Screen'),
       ),
       body: Center(
         child: ElevatedButton(
@@ -210,105 +212,6 @@ class DetailScreen extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-// Navigator4 - Định nghĩa các route name trong một class riêng
-/// Khai báo các route name trong một class riêng là cách tốt để quản lý và bảo trì mã nguồn. Điều này đặc biệt hữu ích khi ứng dụng của bạn có nhiều route và bạn muốn tránh việc phải nhập tên route trực tiếp trong code, từ đó giúp tránh sai sót và dễ dàng thay đổi route name một cách liền mạch.
-class Routes {
-  static const String screen1 = "/screen1";
-  static const String screen2 = "/screen2";
-}
-
-class Navigator4 extends StatelessWidget {
-  const Navigator4({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(routes: {
-      '/': (context) => const NewWidget(), // route default khi start app
-      Routes.screen1: (context) => const Screen1(),
-      Routes.screen2: (context) => const Screen2(),
-    });
-  }
-}
-
-class NewWidget extends StatelessWidget {
-  const NewWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(' Home Screen '),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(foregroundColor: Colors.amber),
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.screen1);
-                },
-                child: const Text('Goto Screen1'),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(foregroundColor: Colors.amber),
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.screen2);
-                },
-                child: const Text('Goto Screen2'),
-              ),
-            ],
-          ),
-        ));
-  }
-}
-
-class Screen1 extends StatelessWidget {
-  const Screen1({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(' Screen1 '),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(foregroundColor: Colors.amber),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Return to Home Screen'),
-        ),
-      ),
-    );
-  }
-}
-
-class Screen2 extends StatelessWidget {
-  const Screen2({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(' Screen2 '),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(foregroundColor: Colors.amber),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Return to Home Screen'),
         ),
       ),
     );
@@ -623,7 +526,7 @@ class Navigator6a extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _showWeather(BuildContext context) {
+    void showWeather(BuildContext context) {
       Navigator.pushNamed(
         context,
         '/screen1',
@@ -634,7 +537,7 @@ class Navigator6a extends StatelessWidget {
       );
     }
 
-    void _showWeatherClass(BuildContext context) {
+    void showWeatherClass(BuildContext context) {
       Navigator.pushNamed(
         context,
         '/screen2',
@@ -642,7 +545,7 @@ class Navigator6a extends StatelessWidget {
       );
     }
 
-    void _showWeatherClass1(BuildContext context) {
+    void showWeatherClass1(BuildContext context) {
       Navigator.pushNamed(
         context,
         '/screen3',
@@ -716,7 +619,7 @@ class Navigator6a extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Điều hướng đến route
-                      _showWeather(context);
+                      showWeather(context);
                     },
                     child: const Text('Go to _showWeather'),
                   ),
@@ -724,7 +627,7 @@ class Navigator6a extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Điều hướng đến route
-                      _showWeatherClass(context);
+                      showWeatherClass(context);
                     },
                     child: const Text('Go to _showWeatherClass'),
                   ),
@@ -732,7 +635,7 @@ class Navigator6a extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Điều hướng đến route
-                      _showWeatherClass1(context);
+                      showWeatherClass1(context);
                     },
                     child: const Text('Go to _showWeatherClass with values'),
                   ),
@@ -808,7 +711,10 @@ class WeatherRouteArguments {
 }
 
 // Navigator6b - Get route name bằng 2 cách: 1. onGenerateRoute 2. settings.name
-/// // Dùng ModalRoute.of(context) get được route name cho cả hai cách khai báo: 1. onGenerateRoute 2. MaterialApp.routes. Tuy nhiên, khi khai báo với onGenerateRoute thì khi gọi widget MaterialPageRoute phải truyền theo tham số RouteSettings? settings (Nói cách khác dùng .push hay .pushNamed đều phải truyền theo tham số RouteSettings thì mới get được route name bằng ModalRoute.of(context)?.settings.name)
+/// Dùng ModalRoute.of(context) get được route name cho cả hai cách Navigator.push và .pushName. Cụ thể:
+///  - Dùng Navigator.push: truyền route name ngay trong phương thức .push (ko liên quan MaterialApp.router và onGenerateRoute)
+///  - Dùng Navigator.pushNamed: chỉ truyển route name trong onGenerateRoute
+/// (Nói cách khác dùng .push phải truyền theo RouteSettings, dùng .pushNamed chỉ cần truyền RouteSettings trong onGenerateRoute thì sẽ get được route name bằng ModalRoute.of(context)?.settings.name)
 
 class Navigator6b extends StatelessWidget {
   const Navigator6b({super.key});
@@ -818,14 +724,12 @@ class Navigator6b extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/home', // Đặt route khởi đầu
       onGenerateRoute: (settings) {
+        // phải gán RouteSettings nếu muốn lấy route name tại màn hình đích
         switch (settings.name) {
-          case '/home':
-            return MaterialPageRoute(builder: (context) => const HomeScreen());
           case '/profile':
             return MaterialPageRoute(
-                builder: (context) => const ProfileScreen2(),
-                settings:
-                    settings); // Gán tên route ở đây, để UI có thể get ra bằng ModalRoute.of(context)?.settings.name;
+              builder: (context) => const ProfileScreen2(),
+            ); // Phải gán route name ở đây, để UI có thể get ra bằng ModalRoute.of(context)?.settings.name;
           case '/profile2':
             return MaterialPageRoute(
                 builder: (context) => const ProfileScreen2(),
@@ -835,8 +739,9 @@ class Navigator6b extends StatelessWidget {
         }
       },
       routes: {
+        // ko cần gán RouteSettings tại đây
         '/home': (context) => const HomeScreen6b(),
-        '/profile11': (context) => const ProfileScreen(),
+        '/profile': (context) => const ProfileScreen(),
       },
       // Các thuộc tính khác của MaterialApp
     );
@@ -864,7 +769,7 @@ class HomeScreen6b extends StatelessWidget {
                     builder: (context) => const ProfileScreen(),
                     settings: const RouteSettings(
                         name:
-                            '/profile'), //truyền theo route name ở đây, để UI có thể get ra bằng ModalRoute.of(context)?.settings.name;
+                            '/profile'), // bắt buộc truyền theo route name ở đây, để UI có thể get ra bằng ModalRoute.of(context)?.settings.name;
                   ),
                 );
               },
@@ -890,9 +795,10 @@ class HomeScreen6b extends StatelessWidget {
               onPressed: () {
                 // Chuyển đến màn hình ProfileScreen
                 Navigator.pushNamed(context,
-                    '/profile'); // quay lên dò trong MaterialApp.routes, nếu có route name thì chuyển đến route đó
+                    '/profile'); // Nếu đi qua onGenerateRoute phải truyền route name, còn đi qua MaterialApp.routes ko cần truyền, để UI có thể get ra bằng ModalRoute.of(context)?.settings.name;
               },
-              child: const Text('Go to Profile - Navigator.pushNamed'),
+              child:
+                  const Text('Go to Profile - Navigator.pushNamed - /profile'),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -909,7 +815,7 @@ class HomeScreen6b extends StatelessWidget {
                 //   ),
                 // );
               },
-              child: const Text('Go to Profile2'),
+              child: const Text('Go to Navigator.pushNamed - Profile2'),
             ),
           ],
         ),
@@ -982,5 +888,70 @@ class ProfileScreen2 extends StatelessWidget {
   }
 }
 
-// Navigator7 - Return data from a screen. Click chọn value tại 1 màn hình, trả về value đó cho màn hình previous
-// Navigator8 - Send data to a new screen
+// Navigator7 - return new page trực tiếp luôn tại hàm Navigator.push
+class Navigator7 extends StatelessWidget {
+  const Navigator7({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: AppBarExample(),
+    );
+  }
+}
+
+class AppBarExample extends StatelessWidget {
+  const AppBarExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Navigator7 Demo'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add_alert),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('This is a snackbar')));
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 40),
+            child: IconButton(
+              icon: const Icon(Icons.navigate_next),
+              tooltip: 'Go to the next page',
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute<void>(
+                  builder: (BuildContext context) {
+                    return Scaffold(
+                      // return new page trực tiếp luôn
+                      appBar: AppBar(
+                        automaticallyImplyLeading:
+                            false, // ẩn nút back (mũi tên back trên AppBar). If leading widget is not null, this parameter has no effect.
+                        title: const Text('Next page'),
+                      ),
+                      body: const Center(
+                        child: Text(
+                          'This is the next page',
+                          style: TextStyle(fontSize: 24),
+                        ),
+                      ),
+                    );
+                  },
+                ));
+              },
+            ),
+          ),
+        ],
+      ),
+      body: const Center(
+        child: Text(
+          'This is the home page',
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    );
+  }
+}
