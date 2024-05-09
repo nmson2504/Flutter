@@ -28,11 +28,9 @@ class _CheckBox1State extends State<CheckBox1> {
   bool _isChecked = true;
 
   void _handleCheckbox(bool value) {
-    if (value != null) {
-      setState(() {
-        _isChecked = value;
-      });
-    }
+    setState(() {
+      _isChecked = value;
+    });
   }
 
   @override
@@ -64,7 +62,7 @@ class _CheckBox1State extends State<CheckBox1> {
         return Colors.orange;
       } else if (states.contains(MaterialState.selected)) {
         // Nếu được chọn
-        return Color.fromARGB(255, 54, 233, 236);
+        return const Color.fromARGB(255, 54, 233, 236);
       }
       // Trạng thái mặc định
       return Colors.red;

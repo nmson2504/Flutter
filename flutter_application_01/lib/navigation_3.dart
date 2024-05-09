@@ -12,8 +12,7 @@ class MyNavigation3 extends StatelessWidget {
         ),
         body: const Center(
           child: TodosScreen(
-            todos: [],
-          ),
+              todos: []), // Pass the todos to the TodosScreen widget.
         ),
       ),
     );
@@ -21,14 +20,15 @@ class MyNavigation3 extends StatelessWidget {
 }
 
 // Return data from a screen về màn hình trước đó
-class SelectionButton extends StatefulWidget {
-  const SelectionButton({super.key});
+// Example 1
+class ScreenA extends StatefulWidget {
+  const ScreenA({super.key});
 
   @override
-  State<SelectionButton> createState() => _SelectionButtonState();
+  State<ScreenA> createState() => _ScreenAState();
 }
 
-class _SelectionButtonState extends State<SelectionButton> {
+class _ScreenAState extends State<ScreenA> {
   String _displayText = ''; // Biến để lưu trữ giá trị result
 
   @override
@@ -43,6 +43,101 @@ class _SelectionButtonState extends State<SelectionButton> {
           ),
           Text(
             _displayText, // Hiển thị giá trị result
+            style: const TextStyle(fontSize: 20, color: Colors.red),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _navigateToScreenB(
+                  context); // Navigate to the second screen when tapped.
+            },
+            child: const Text('Pick an option, any option!'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _navigateToScreenB(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ScreenB()),
+    );
+    // Xử lý dữ liệu trả về từ Màn hình chi tiết
+    if (result != null) {
+      setState(() {
+        _displayText = result;
+      });
+    }
+  }
+}
+
+class ScreenB extends StatelessWidget {
+  const ScreenB({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pick an option'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Close the screen and return 'ABC!' as the result.
+                  Navigator.pop(context,
+                      'ABC!'); // void pop<T extends Object?>(BuildContext context, [T? result])
+                },
+                child: const Text('ABC!'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Close the screen and return '123.' as the result.
+                  Navigator.pop(context,
+                      '123.'); // void pop<T extends Object?>(BuildContext context, [T? result])
+                },
+                child: const Text('123.'),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Example 2 - Shows a SnackBar with the new result
+class SelectionButton extends StatefulWidget {
+  const SelectionButton({super.key});
+
+  @override
+  State<SelectionButton> createState() => _SelectionButtonState();
+}
+
+class _SelectionButtonState extends State<SelectionButton> {
+  String displayText = ''; // Biến để lưu trữ giá trị result
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Result:',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            displayText, // Hiển thị giá trị result
             style: const TextStyle(fontSize: 20, color: Colors.red),
           ),
           ElevatedButton(
@@ -81,7 +176,7 @@ class _SelectionButtonState extends State<SelectionButton> {
 
     //get result from SelectionScreen and gán vô _displayText, show lên màn hình
     setState(() {
-      _displayText = result; // Cập nhật giá trị _displayText với kết quả result
+      displayText = result; // Cập nhật giá trị _displayText với kết quả result
     });
   }
 }
@@ -104,7 +199,8 @@ class SelectionScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Close the screen and return "Yep!" as the result.
-                  Navigator.pop(context, 'Yep!');
+                  Navigator.pop(context,
+                      'Yep!'); // void pop<T extends Object?>(BuildContext context, [T? result])
                 },
                 child: const Text('Yep!'),
               ),
@@ -114,7 +210,8 @@ class SelectionScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Close the screen and return "Nope." as the result.
-                  Navigator.pop(context, 'Nope.');
+                  Navigator.pop(context,
+                      'Nope.'); // void pop<T extends Object?>(BuildContext context, [T? result])
                 },
                 child: const Text('Nope.'),
               ),
@@ -126,7 +223,7 @@ class SelectionScreen extends StatelessWidget {
   }
 }
 
-//Send data to a new screen
+//Send 1 data in list to a new screen
 class Todo {
   final String title;
   final String description;

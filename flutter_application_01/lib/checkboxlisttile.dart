@@ -23,7 +23,6 @@ class MyCBLT extends StatefulWidget {
 }
 
 class _MyCBLTState extends State<MyCBLT> {
-  @override
   bool _isChecked = false;
 
   @override
@@ -56,7 +55,7 @@ class _MyCBLTState extends State<MyCBLT> {
               side: const BorderSide(
                   width: 10, color: Color.fromARGB(255, 243, 33, 51))),
           // format ListTile
-          tileColor: Color.fromARGB(255, 160, 230, 249),
+          tileColor: const Color.fromARGB(255, 160, 230, 249),
           contentPadding: const EdgeInsets.all(10),
           title: const Text('Checkbox List Tile'),
           subtitle: const Text('Subtitle'),
