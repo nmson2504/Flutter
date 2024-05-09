@@ -1,4 +1,4 @@
-void main() {
+  void main() {
 /* FINAL and CONST
 https://linhta.dev/blog/final-va-const-trong-dart/#:~:text=const%20phải%20có%20giá%20trị,trị%20với%20object%20ban%20đầu.  
 
@@ -20,7 +20,7 @@ https://www.youtube.com/watch?v=V4t-6A5peA8&list=PL3Ob3F0T-08brnWfs8np2ROjICeT-P
   // list1.add(4);
   print('list1: ${list1}');
 
-// Object final vẫn có thể thay đổi giá trị được
+//   Object final vẫn có thể thay đổi giá trị được
   final List list2 = [1, 2, 3];
   list2[0] = 10;
   list2.add(4);
