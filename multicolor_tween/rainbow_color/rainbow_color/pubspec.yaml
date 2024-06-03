@@ -1,0 +1,21 @@
+name: rainbow_color
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # rainbow_color: ^2.0.1
+  rainbow_vis: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
+
+flutter:
+  uses-material-design: true

@@ -5,19 +5,144 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Dart",
-            "type": "dart",
-            "request": "launch",
-            "program": "bin/main.dart"
-          
-        },
-
-        {
-            "name": "dart_application_1",
-            "cwd": "dart_application_1",
+            "name": "easyloading",
+            "cwd": "easyloading",
             "request": "launch",
             "type": "dart"
-          //  "console":"terminal"
+        },
+        {
+            "name": "easyloading (profile mode)",
+            "cwd": "easyloading",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "easyloading (release mode)",
+            "cwd": "easyloading",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter_application_all",
+            "cwd": "flutter_application_all",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_application_all (profile mode)",
+            "cwd": "flutter_application_all",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_application_all (release mode)",
+            "cwd": "flutter_application_all",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "net_ninja_beginner",
+            "cwd": "net_ninja_beginner",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "net_ninja_beginner (profile mode)",
+            "cwd": "net_ninja_beginner",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "net_ninja_beginner (release mode)",
+            "cwd": "net_ninja_beginner",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter_application_1",
+            "cwd": "demo01\\flutter_application_1",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_application_1 (profile mode)",
+            "cwd": "demo01\\flutter_application_1",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_application_1 (release mode)",
+            "cwd": "demo01\\flutter_application_1",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter_application_2",
+            "cwd": "demo01\\flutter_application_2",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_application_2 (profile mode)",
+            "cwd": "demo01\\flutter_application_2",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_application_2 (release mode)",
+            "cwd": "demo01\\flutter_application_2",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "easyloading_nms",
+            "cwd": "easyloading_nms\\easyloading_nms",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "easyloading_nms (profile mode)",
+            "cwd": "easyloading_nms\\easyloading_nms",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "easyloading_nms (release mode)",
+            "cwd": "easyloading_nms\\easyloading_nms",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "flutter_application_nms",
+            "cwd": "NMS\\flutter_application_nms",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "flutter_application_nms (profile mode)",
+            "cwd": "NMS\\flutter_application_nms",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flutter_application_nms (release mode)",
+            "cwd": "NMS\\flutter_application_nms",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
         }
     ]
 }
