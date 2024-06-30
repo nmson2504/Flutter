@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import "implicit.dart";
 import "explicit.dart";
@@ -16,6 +18,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: MyApp());
+    return MaterialApp(
+        scrollBehavior: const MaterialScrollBehavior()
+            .copyWith(dragDevices: PointerDeviceKind.values.toSet()),
+        home: const MyApp());
   }
 }

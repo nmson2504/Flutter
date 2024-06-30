@@ -8,6 +8,7 @@ import 'refreshindicator.dart';
 import 'refreshindicator-1.dart';
 import 'refreshindicator-2.dart';
 import 'pull_to_refresh.dart';
+import 'pageview.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
@@ -21,7 +22,7 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-  runApp(const MyEasyLoading());
+  runApp(const MyPageView());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }

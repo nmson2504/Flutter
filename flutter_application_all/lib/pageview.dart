@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class MyPageView extends StatelessWidget {
@@ -6,9 +8,11 @@ class MyPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: const MaterialScrollBehavior()
+          .copyWith(dragDevices: PointerDeviceKind.values.toSet()),
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter PageView')),
-        body: PageView4(),
+        body: const PageView1(),
         // backgroundColor: Color.fromARGB(255, 235, 217, 163),
       ),
     );

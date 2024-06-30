@@ -3,19 +3,16 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        appBar: AppBar(
-          title: const Text('Tweening and Curves'),
-        ),
-        body: const Home(),
-      );
-    
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tweening and Curves'),
+      ),
+      body: const Home(),
+    );
   }
 }
 
@@ -58,11 +55,19 @@ class Home extends StatelessWidget {
 
   /// SAW TOOTH TWEEN - tween that goes from 0 to 1 multiple times,
   /// depending on the value passed in
-  static const Curve sawToothCurve = SawTooth(7);
+  static const Curve sawToothCurve = SawTooth(3);
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
+    // Initialize the PageController with initialPage set to 1
+    final PageController controller = PageController(initialPage: 3);
+    return SizedBox(
+        // width: double.infinity,
+        // height: double
+        //     .infinity, // hoặc bất kỳ kích thước nào khác phù hợp MediaQuery.of(context).size.height, // Chiều cao cố định
+
+        child: PageView(
+      controller: controller,
       children: <Widget>[
         AnimationAndCurveDemo(
           lable: 'Linear - EaseIn and EaseOut',
@@ -112,7 +117,7 @@ class Home extends StatelessWidget {
           size: 200,
         ),
       ],
-    );
+    ));
   }
 }
 
@@ -278,7 +283,8 @@ class _AnimationAndCurveDemoState extends State<AnimationAndCurveDemo>
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(_label, style: Theme.of(context).textTheme.headlineMedium),
+          child:
+              Text(_label, style: Theme.of(context).textTheme.headlineMedium),
         ),
         Expanded(
           child: Padding(
