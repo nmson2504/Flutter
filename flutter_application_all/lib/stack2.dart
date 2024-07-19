@@ -1,368 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MyStack extends StatelessWidget {
-  const MyStack({super.key});
+class MyStackB extends StatelessWidget {
+  const MyStackB({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Flutter Stack')),
-        body: const AnimatedPositionedDirectionalDemo4(),
+        appBar: AppBar(title: const Text('Flutter Stack Animation')),
+        body: const PositionedTransitionExample(),
         // backgroundColor: Color.fromARGB(255, 235, 217, 163),
       ),
-    );
-  }
-}
-
-class MyStack0 extends StatelessWidget {
-  const MyStack0({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.centerLeft, // align các object trên so container cha
-      // alignment: AlignmentDirectional.bottomCenter, // or AlignmentDirectional.bottomEnd
-      // textDirection: TextDirection.rtl, // chiều đổ stack
-      children: <Widget>[
-        Container(
-          width: 290,
-          height: 190,
-          color: Colors.green,
-        ),
-        Container(
-          width: 300,
-          height: 170,
-          color: Colors.red,
-        ),
-        Container(
-          width: 220,
-          height: 400,
-          color: Colors.yellow,
-        ),
-      ],
-    );
-  }
-}
-
-class MyStack1 extends StatelessWidget {
-  const MyStack1({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.grey,
-        // height: 400,
-        width: 500,
-        child: Stack(
-          // alignment:Alignment.center, // align all object so container cha
-          alignment: AlignmentDirectional.bottomEnd, // or AlignmentDirectional.bottomEnd
-          // textDirection: TextDirection.rtl, // chiều đổ stack
-          // fit: StackFit.passthrough,
-          // Default is StackFit.loose - ko thay đổi kích thước;
-          //StackFit.expand - bung full 2 chiều container cha;
-          // StackFit.passthrough - nếu container cha có set height thì bung full width của container cha, nếu container cha có set width thì bung full height của container cha, nếu set cả height & width thì như expand;
-          // clipBehavior: Clip.none,
-          children: <Widget>[
-            Container(
-              width: 300,
-              height: 190,
-              color: Colors.green,
-            ),
-            Container(
-              width: 280,
-              height: 170,
-              color: Colors.red,
-            ),
-            Container(
-              width: 220,
-              height: 520,
-              color: Colors.yellow,
-            ),
-          ],
-        ));
-  }
-}
-
-class MyStack2 extends StatelessWidget {
-  const MyStack2({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.grey,
-        height: 400,
-        width: 500,
-        child: Stack(
-          // alignment:Alignment.center, // align các object trên so với object dưới cùng
-          alignment: AlignmentDirectional.bottomEnd, // or AlignmentDirectional.bottomEnd
-          clipBehavior: Clip
-              .none, // xử lý khi object tràn khỏi container (set Positioned(top, left...)). Clip.none - show full object, các value khác - cắt phần tràn ngoài container
-          children: <Widget>[
-            Container(
-              width: 300,
-              height: 190,
-              color: Colors.green,
-            ),
-            Container(
-              width: 280,
-              height: 170,
-              color: Colors.red,
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Container(
-                width: 200,
-                height: 550,
-                color: Colors.yellow,
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 300,
-              child: Container(
-                width: 220,
-                height: 520,
-                color: const Color.fromARGB(255, 255, 59, 232),
-              ),
-            ),
-          ],
-        ));
-  }
-}
-
-class MyStack3 extends StatelessWidget {
-  const MyStack3({super.key});
-// canh object A theo object B
-  @override
-  Widget build(BuildContext context) {
-    double parentWidth = 400;
-    double parentHeight = 380;
-    double childWidth = 200;
-    double childHeight = 120;
-
-    double topCenter = (parentHeight - childHeight) / 2;
-    double rightCenter = (parentWidth - childWidth) / 2;
-
-    double heightOffset = parentHeight - childHeight;
-    double widthOffset = parentWidth - childWidth;
-
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.center,
-      children: <Widget>[
-        Container(
-          width: parentWidth,
-          height: parentHeight,
-          color: Colors.green,
-        ),
-        // align center
-        Positioned(
-          top: topCenter,
-          right: rightCenter,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: Colors.red,
-          ),
-        ),
-        // align bottom - left
-        Positioned(
-          top: heightOffset,
-          right: widthOffset,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: const Color.fromARGB(255, 124, 54, 244),
-          ),
-        ),
-        // align bottom - right
-        Positioned(
-          top: heightOffset,
-          left: widthOffset,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: const Color.fromARGB(255, 244, 238, 54),
-          ),
-        ),
-        // align top - right
-        Positioned(
-          bottom: heightOffset,
-          left: widthOffset,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: const Color.fromARGB(255, 244, 54, 228),
-          ),
-        ),
-        // align top - left
-        Positioned(
-          bottom: heightOffset,
-          right: widthOffset,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: const Color.fromARGB(255, 101, 219, 240),
-          ),
-        ),
-        // align center - left
-        Positioned(
-          bottom: topCenter,
-          right: widthOffset,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: const Color.fromARGB(255, 101, 240, 191),
-          ),
-        ),
-        // align center - right
-        Positioned(
-          bottom: topCenter,
-          left: widthOffset,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: const Color.fromARGB(255, 240, 177, 101),
-          ),
-        ),
-        // align center - bottom
-        Positioned(
-          top: heightOffset,
-          left: rightCenter,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: const Color.fromARGB(255, 121, 174, 168),
-          ),
-        ),
-        // align center - top
-        Positioned(
-          bottom: heightOffset,
-          left: rightCenter,
-          child: Container(
-            width: childWidth,
-            height: childHeight,
-            color: const Color.fromARGB(255, 230, 175, 199),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// Positioned.directional({Key? key,required TextDirection textDirection,double? start,double? top,double? end,double? bottom,double? width,double? height,required Widget child})
-/* Chỉ có thể thiết lập hai trong ba giá trị ngang (start, end, width) và chỉ có thể thiết lập hai trong ba giá trị dọc (top, bottom, height). Trong mỗi trường hợp, ít nhất một trong ba giá trị phải là null. */
-
-class PositionedDirectionalDemo extends StatelessWidget {
-  const PositionedDirectionalDemo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: 300,
-          height: 300,
-          color: Colors.yellow,
-        ),
-        // Positioned.directional widget
-        Positioned.directional(
-          textDirection: TextDirection.ltr,
-          start: 50,
-          top: 50,
-          width: 100,
-          height: 100,
-          child: Container(
-            color: Colors.blue,
-            child: const Center(
-              child: Text(
-                'LTR',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        Positioned.directional(
-          textDirection: TextDirection.rtl,
-          start: 50,
-          top: 150,
-          width: 100,
-          height: 100,
-          child: Container(
-            color: Colors.red,
-            child: const Center(
-              child: Text(
-                'RTL',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// Positioned.fromRect({Key? key, required Rect rect, required Widget child})
-/* 
-Sử dụng Positioned.fromRect để định vị một Container màu xanh lam tại vị trí được xác định bởi Rect.fromLTWH(50, 50, 100, 100), với kích thước 100x100 bắt đầu từ tọa độ (50, 50). */
-class PositionedFromRectDemo extends StatelessWidget {
-  const PositionedFromRectDemo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: 300,
-          height: 300,
-          color: Colors.yellow,
-        ),
-        Positioned.fromRect(
-          rect: const Rect.fromLTWH(50, 50, 100, 100),
-          child: Container(
-            color: Colors.blue,
-            child: const Center(
-              child: Text(
-                'Rect.fromLTWH',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// Positioned.fromRelativeRect({Key? key, required RelativeRect rect, required Widget child})
-/* Sử dụng Positioned.fromRelativeRect để định vị một Container màu xanh lam dựa trên RelativeRect.fromLTRB(50, 50, 150, 150). Điều này có nghĩa là widget con sẽ được đặt cách 50 đơn vị từ cạnh trái, 50 đơn vị từ cạnh trên, 150 đơn vị từ cạnh phải và 150 đơn vị từ cạnh dưới của Stack. */
-class PositionedFromRelativeRectDemo extends StatelessWidget {
-  const PositionedFromRelativeRectDemo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: 300,
-          height: 300,
-          color: Colors.yellow,
-        ),
-        Positioned.fromRelativeRect(
-          rect: const RelativeRect.fromLTRB(50, 50, 150, 150),
-          child: Container(
-            color: Colors.blue,
-            child: const Center(
-              child: Text(
-                'RelativeRect.fromLTRB',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -546,6 +194,53 @@ class _AnimatedPositionedDirectionalDemo3State extends State<AnimatedPositionedD
           ),
         ),
       ],
+    );
+  }
+}
+
+// AnimatedPositionedDirectional example 3b - resize ver 2
+
+class AnimatedPositionedDirectionalExample extends StatefulWidget {
+  const AnimatedPositionedDirectionalExample({super.key});
+
+  @override
+  State<AnimatedPositionedDirectionalExample> createState() => _AnimatedPositionedDirectionalExampleState();
+}
+
+class _AnimatedPositionedDirectionalExampleState extends State<AnimatedPositionedDirectionalExample> {
+  bool selected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.ltr, // You can change this to TextDirection.rtl if needed
+      child: SizedBox(
+        width: 200,
+        height: 350,
+        child: Stack(
+          children: <Widget>[
+            AnimatedPositionedDirectional(
+              start: selected ? 0.0 : 150.0, // Horizontal position
+              top: selected ? 50.0 : 150.0, // Vertical position
+              width: selected ? 200.0 : 50.0,
+              height: selected ? 50.0 : 200.0,
+              duration: const Duration(seconds: 2),
+              curve: Curves.fastOutSlowIn,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selected = !selected;
+                  });
+                },
+                child: const ColoredBox(
+                  color: Colors.blue,
+                  child: Center(child: Text('Tap me')),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -746,6 +441,107 @@ class _AnimatedPositionedDirectionalDemo6State extends State<AnimatedPositionedD
           ),
         ),
       ],
+    );
+  }
+}
+
+// AnimatedPositioned Example - click is change size & move
+
+class AnimatedPositionedExample extends StatefulWidget {
+  const AnimatedPositionedExample({super.key});
+
+  @override
+  State<AnimatedPositionedExample> createState() => _AnimatedPositionedExampleState();
+}
+
+class _AnimatedPositionedExampleState extends State<AnimatedPositionedExample> {
+  bool selected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      height: 350,
+      child: Stack(
+        children: <Widget>[
+          AnimatedPositioned(
+            width: selected ? 200.0 : 50.0,
+            height: selected ? 50.0 : 200.0,
+            top: selected ? 50.0 : 150.0,
+            duration: const Duration(seconds: 2),
+            curve: Curves.fastOutSlowIn,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  selected = !selected;
+                });
+              },
+              child: const ColoredBox(
+                color: Colors.blue,
+                child: Center(child: Text('Tap me')),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// PositionedTransition Example - transition object
+class PositionedTransitionExample extends StatefulWidget {
+  const PositionedTransitionExample({super.key});
+
+  @override
+  State<PositionedTransitionExample> createState() => _PositionedTransitionExampleState();
+}
+
+/// [AnimationController]s can be created with `vsync: this` because of
+/// [TickerProviderStateMixin].
+class _PositionedTransitionExampleState extends State<PositionedTransitionExample> with TickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 2),
+    vsync: this,
+  )..repeat(reverse: true);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const double smallLogo = 100;
+    const double bigLogo = 200;
+
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final Size biggest = constraints.biggest;
+        return Stack(
+          children: <Widget>[
+            PositionedTransition(
+              rect: RelativeRectTween(
+                begin: RelativeRect.fromSize(
+                  const Rect.fromLTWH(0, 0, smallLogo, smallLogo),
+                  biggest,
+                ),
+                end: RelativeRect.fromSize(
+                  Rect.fromLTWH(biggest.width - bigLogo, biggest.height - bigLogo, bigLogo, bigLogo),
+                  biggest,
+                ),
+              ).animate(CurvedAnimation(
+                parent: _controller,
+                curve: Curves.elasticInOut,
+              )),
+              child: const Padding(
+                padding: EdgeInsets.all(8),
+                child: FlutterLogo(),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
