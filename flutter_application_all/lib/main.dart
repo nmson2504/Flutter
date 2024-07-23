@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_application_01/easyloading.dart';
-import 'circularprogress.dart';
+// import 'circularprogress.dart';
 import 'listview.dart';
 import 'gridview.dart';
 import 'refreshindicator.dart';
@@ -25,7 +25,8 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-  runApp(const MyDemoUI2());
+  // runApp(const MyDemoUI2());
+  runApp(const MyEasyLoading());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }
