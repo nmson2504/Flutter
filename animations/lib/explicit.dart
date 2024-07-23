@@ -397,3 +397,61 @@ class _Explicit06State extends State<Explicit06>
     );
   }
 }
+
+//  Example 6a
+
+class Explicit06a extends StatelessWidget {
+  const Explicit06a({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).push(_createRoute());
+          },
+          child: const Text('Go!'),
+        ),
+      ),
+    );
+  }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    // thời gian transition đi
+    transitionDuration: const Duration(seconds: 1), // Adjust the duration here
+    // thời gian transition về
+    reverseTransitionDuration: const Duration(
+        seconds: 2), // Adjust the duration for reverse transition
+    pageBuilder: (context, animation, secondaryAnimation) => const Page2(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
+
+class Page2 extends StatelessWidget {
+  const Page2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: const Center(
+        child: Text('Page 2'),
+      ),
+    );
+  }
+}
