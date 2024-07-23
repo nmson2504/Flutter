@@ -25,8 +25,7 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-  // runApp(const MyDemoUI2());
-  runApp(const MyEasyLoading());
+  runApp(const MyDemoUI2());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }
