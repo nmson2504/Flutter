@@ -5,6 +5,26 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "animations",
+            "cwd": "animations",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "animations (profile mode)",
+            "cwd": "animations",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "animations (release mode)",
+            "cwd": "animations",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
             "name": "easyloading",
             "cwd": "easyloading",
             "request": "launch",
@@ -65,46 +85,6 @@
             "flutterMode": "release"
         },
         {
-            "name": "flutter_application_1",
-            "cwd": "demo01\\flutter_application_1",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "flutter_application_1 (profile mode)",
-            "cwd": "demo01\\flutter_application_1",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "flutter_application_1 (release mode)",
-            "cwd": "demo01\\flutter_application_1",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "flutter_application_2",
-            "cwd": "demo01\\flutter_application_2",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "flutter_application_2 (profile mode)",
-            "cwd": "demo01\\flutter_application_2",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "flutter_application_2 (release mode)",
-            "cwd": "demo01\\flutter_application_2",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
             "name": "easyloading_nms",
             "cwd": "easyloading_nms\\easyloading_nms",
             "request": "launch",
@@ -125,21 +105,41 @@
             "flutterMode": "release"
         },
         {
-            "name": "flutter_application_nms",
-            "cwd": "NMS\\flutter_application_nms",
+            "name": "multicolor_tween",
+            "cwd": "multicolor_tween\\multicolor_tween",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "flutter_application_nms (profile mode)",
-            "cwd": "NMS\\flutter_application_nms",
+            "name": "multicolor_tween (profile mode)",
+            "cwd": "multicolor_tween\\multicolor_tween",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "flutter_application_nms (release mode)",
-            "cwd": "NMS\\flutter_application_nms",
+            "name": "multicolor_tween (release mode)",
+            "cwd": "multicolor_tween\\multicolor_tween",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "rainbow_color",
+            "cwd": "multicolor_tween\\rainbow_color\\rainbow_color",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "rainbow_color (profile mode)",
+            "cwd": "multicolor_tween\\rainbow_color\\rainbow_color",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "rainbow_color (release mode)",
+            "cwd": "multicolor_tween\\rainbow_color\\rainbow_color",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

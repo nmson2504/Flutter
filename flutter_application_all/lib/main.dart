@@ -10,6 +10,7 @@ import 'refreshindicator-2.dart';
 import 'pull_to_refresh.dart';
 import 'pageview.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'demoUI2.dart';
 
 void main() {
   debugPrintGestureArenaDiagnostics = true;
@@ -22,7 +23,7 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-  runApp(const MyPageView());
+  runApp(const MyDemoUI2());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }
