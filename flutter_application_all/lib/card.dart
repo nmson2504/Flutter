@@ -8,15 +8,53 @@ class MyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-          colorSchemeSeed: const Color(0xff6750a4), useMaterial3: true),
+      theme: ThemeData(colorSchemeSeed: const Color(0xff6750a4), useMaterial3: true),
       home: Scaffold(
         appBar: AppBar(title: const Text('Card Sample')),
-        body: const CardExample3(),
+        body: const CardExample01(),
       ),
     );
   }
 }
+
+//
+class CardExample01 extends StatelessWidget {
+  const CardExample01({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: const <Widget>[
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.account_circle),
+            title: Text('John Doe'),
+            subtitle: Text('Software Engineer'),
+            trailing: Icon(Icons.arrow_forward),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.account_circle),
+            title: Text('Jane Smith'),
+            subtitle: Text('Project Manager'),
+            trailing: Icon(Icons.arrow_forward),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.account_circle),
+            title: Text('Robert Johnson'),
+            subtitle: Text('UX Designer'),
+            trailing: Icon(Icons.arrow_forward),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+//
 
 class CardExample extends StatelessWidget {
   const CardExample({super.key});
@@ -90,12 +128,12 @@ class CardExample3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Card(
-          margin: EdgeInsets.all(50),
+        const Card(
+          margin: const EdgeInsets.all(50),
           color: Color.fromARGB(255, 200, 245, 201),
           shadowColor: Color.fromARGB(255, 139, 96, 130),
-          surfaceTintColor: Colors
-              .amber, // trộn với color:, 3 thuộc tính color - surfaceTintColor - elevation có ảnh hưởng lẫn nhau
+          surfaceTintColor:
+              Colors.amber, // trộn với color:, 3 thuộc tính color - surfaceTintColor - elevation có ảnh hưởng lẫn nhau
           elevation: 30,
           // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           //  shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -119,15 +157,15 @@ class CardExample3 extends StatelessWidget {
           width: 500,
           height: 200,
           child: Card(
-            margin: EdgeInsets.all(50),
-            color: Color.fromARGB(255, 200, 245, 201),
-            shadowColor: Color.fromARGB(255, 139, 96, 130),
+            margin: const EdgeInsets.all(50),
+            color: const Color.fromARGB(255, 200, 245, 201),
+            shadowColor: const Color.fromARGB(255, 139, 96, 130),
             surfaceTintColor: Colors
                 .amber, // trộn với color:, 3 thuộc tính color - surfaceTintColor - elevation có ảnh hưởng lẫn nhau
             elevation: 50,
             // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
             //  shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            shape: StadiumBorder(side: BorderSide(width: 2)), // kiểu border
+            shape: const StadiumBorder(side: BorderSide(width: 2)), // kiểu border
             /* 
             borderOnForeground của widget Card được sử dụng để xác định liệu viền của Card có được vẽ lên phần nền của các phần tử con bên trong hay không. Nếu bạn đặt borderOnForeground thành true, viền của Card sẽ được vẽ đè lên nền của các phần tử con. Nếu bạn đặt nó thành false, nền của các phần tử con sẽ được đè lên phía trên viền của Card. (phải set màu nền, viền cho các object liên quan mới test được)
              */
@@ -138,11 +176,10 @@ class CardExample3 extends StatelessWidget {
                 ListTileTheme(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    side: BorderSide(
-                        color: Color.fromARGB(255, 79, 22, 236), width: 2.0),
+                    side: const BorderSide(color: Color.fromARGB(255, 79, 22, 236), width: 2.0),
                   ),
-                  child: ListTile(
-                    tileColor: const Color.fromARGB(255, 243, 33, 180),
+                  child: const ListTile(
+                    tileColor: Color.fromARGB(255, 243, 33, 180),
                     leading: Icon(Icons.album, color: Colors.cyan, size: 45),
                     title: Text(
                       "Let's Talk About Love",
