@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_application_01/card.dart';
 import 'package:flutter_application_01/easyloading.dart';
-import 'circularprogress.dart';
+// import 'circularprogress.dart';
 import 'listview.dart';
 import 'gridview.dart';
 import 'refreshindicator.dart';
@@ -15,6 +15,7 @@ import 'stack.dart';
 import 'stack2.dart';
 import 'demo_ui01.dart';
 import 'decoratedbox.dart';
+import 'demoUI2.dart';
 
 void main() {
   debugPrintGestureArenaDiagnostics = true;

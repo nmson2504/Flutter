@@ -70,6 +70,8 @@ flutter:
   assets:
     - assets/ 
     - assets/images/day-night.png 
+    - assets/images/ 
+    - assets/images/avatar1.png
     - assets/image3.jpg
     - assets/image2.jpg
     - assets/image1.png
