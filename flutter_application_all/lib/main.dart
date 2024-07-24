@@ -13,12 +13,14 @@ import 'pageview.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'stack.dart';
 import 'stack2.dart';
-import 'demo_ui01.dart';
+import 'demoUI1.dart';
 import 'decoratedbox.dart';
 import 'demoUI2.dart';
+import 'demoUI3.dart';
+// import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
 void main() {
-  debugPrintGestureArenaDiagnostics = true;
+  // debugPrintGestureArenaDiagnostics = true;
   // changes app in this
   // runApp(const MyMenuAnchor());
   // WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +30,8 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-  runApp(const MyUI());
+
+  runApp(const MyDemoUI3());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }

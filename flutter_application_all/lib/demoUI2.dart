@@ -8,8 +8,7 @@ class MyDemoUI2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scrollBehavior: const MaterialScrollBehavior()
-          .copyWith(dragDevices: PointerDeviceKind.values.toSet()),
+      scrollBehavior: const MaterialScrollBehavior().copyWith(dragDevices: PointerDeviceKind.values.toSet()),
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter DemoUI2')),
         body: const UserScreen(),
@@ -18,6 +17,7 @@ class MyDemoUI2 extends StatelessWidget {
     );
   }
 }
+
 //---------------------------
 // Example 1
 class UserListScreen extends StatelessWidget {
@@ -40,7 +40,7 @@ class UserListScreen extends StatelessWidget {
   }
 }
 
-// 
+//
 class UserCard extends StatelessWidget {
   final User user;
 
@@ -59,14 +59,14 @@ class UserCard extends StatelessWidget {
           children: [
             IconButton(
               icon: Icon(user.liked ? Icons.favorite : Icons.favorite_border),
-               tooltip: user.liked ? 'Unlike' : 'Like',
+              tooltip: user.liked ? 'Unlike' : 'Like',
               onPressed: () {
                 // Xử lý khi người dùng nhấn vào biểu tượng like
               },
             ),
             IconButton(
               icon: Icon(user.going ? Icons.check_circle : Icons.add_circle_outline),
-               tooltip: user.going ? 'Cancel going' : 'Mark going',
+              tooltip: user.going ? 'Cancel going' : 'Mark going',
               onPressed: () {
                 // Xử lý khi người dùng nhấn vào biểu tượng go
               },
@@ -79,7 +79,7 @@ class UserCard extends StatelessWidget {
   }
 }
 
-// 
+//
 class User {
   final String avatarUrl;
   final String name;
@@ -135,7 +135,7 @@ List<User> users = [
   // Thêm các user khác tương tự
 ];
 
-// Example 2 - 
+// Example 2 -
 class User2 {
   final String avatar;
   final String name;
@@ -158,7 +158,7 @@ class _UserScreenState extends State<UserScreen> {
     // Thêm thêm dữ liệu user
   ];
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -175,7 +175,8 @@ class _UserScreenState extends State<UserScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align children to the edges
                 children: <Widget>[
-                  Row( // Wrap this Row to keep the Avatar and Text together
+                  Row(
+                    // Wrap this Row to keep the Avatar and Text together
                     children: [
                       CircleAvatar(
                         backgroundImage: AssetImage(user.avatar),
@@ -185,12 +186,14 @@ class _UserScreenState extends State<UserScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(user.name, style: const TextStyle(fontSize: 18.0)),
-                          Text(user.avatar, style: const TextStyle(fontSize: 14.0)), // Changed fontSize for better readability
+                          Text(user.avatar,
+                              style: const TextStyle(fontSize: 14.0)), // Changed fontSize for better readability
                         ],
                       ),
                     ],
                   ),
-                  Row( // This Row contains the icons
+                  Row(
+                    // This Row contains the icons
                     children: <Widget>[
                       IconButton(
                         icon: const Icon(Icons.favorite),
