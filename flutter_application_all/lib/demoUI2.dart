@@ -12,12 +12,13 @@ class MyDemoUI2 extends StatelessWidget {
           .copyWith(dragDevices: PointerDeviceKind.values.toSet()),
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter DemoUI2')),
-        body:  const UserListScreen2(),
+        body: const UserListScreen2(),
         // backgroundColor: Color.fromARGB(255, 235, 217, 163),
       ),
     );
   }
 }
+
 //---------------------------
 // Example 1
 class UserListScreen extends StatelessWidget {
@@ -40,7 +41,7 @@ class UserListScreen extends StatelessWidget {
   }
 }
 
-// 
+//
 class UserCard extends StatelessWidget {
   final User user;
 
@@ -59,14 +60,15 @@ class UserCard extends StatelessWidget {
           children: [
             IconButton(
               icon: Icon(user.liked ? Icons.favorite : Icons.favorite_border),
-               tooltip: user.liked ? 'Unlike' : 'Like',
+              tooltip: user.liked ? 'Unlike' : 'Like',
               onPressed: () {
                 // Xử lý khi người dùng nhấn vào biểu tượng like
               },
             ),
             IconButton(
-              icon: Icon(user.going ? Icons.check_circle : Icons.add_circle_outline),
-               tooltip: user.going ? 'Cancel going' : 'Mark going',
+              icon: Icon(
+                  user.going ? Icons.check_circle : Icons.add_circle_outline),
+              tooltip: user.going ? 'Cancel going' : 'Mark going',
               onPressed: () {
                 // Xử lý khi người dùng nhấn vào biểu tượng go
               },
@@ -79,7 +81,7 @@ class UserCard extends StatelessWidget {
   }
 }
 
-// 
+//
 class User {
   final String avatarUrl;
   final String name;
@@ -135,7 +137,7 @@ List<User> users = [
   // Thêm các user khác tương tự
 ];
 
-// Example 2 - 
+// Example 2 -
 class User2 {
   final String avatar;
   final String name;
@@ -158,7 +160,7 @@ class _UserScreenState extends State<UserScreen> {
     // Thêm thêm dữ liệu user
   ];
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -173,9 +175,11 @@ class _UserScreenState extends State<UserScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align children to the edges
+                mainAxisAlignment: MainAxisAlignment
+                    .spaceBetween, // Align children to the edges
                 children: <Widget>[
-                  Row( // Wrap this Row to keep the Avatar and Text together
+                  Row(
+                    // Wrap this Row to keep the Avatar and Text together
                     children: [
                       CircleAvatar(
                         backgroundImage: AssetImage(user.avatar),
@@ -184,13 +188,18 @@ class _UserScreenState extends State<UserScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(user.name, style: const TextStyle(fontSize: 18.0)),
-                          Text(user.avatar, style: const TextStyle(fontSize: 14.0)), // Changed fontSize for better readability
+                          Text(user.name,
+                              style: const TextStyle(fontSize: 18.0)),
+                          Text(user.avatar,
+                              style: const TextStyle(
+                                  fontSize:
+                                      14.0)), // Changed fontSize for better readability
                         ],
                       ),
                     ],
                   ),
-                  Row( // This Row contains the icons
+                  Row(
+                    // This Row contains the icons
                     children: <Widget>[
                       IconButton(
                         icon: const Icon(Icons.favorite),
@@ -230,11 +239,10 @@ class _UserScreenState extends State<UserScreen> {
 
 // Example 3
 
-
 class UserListScreen2 extends StatelessWidget {
- const UserListScreen2({super.key});
+  const UserListScreen2({super.key});
 
-  static  List<User3> users = [
+  static List<User3> users = [
     User3('John Doe', 'https://i.imgur.com/h8uaAQr.png'),
     User3('Jane Smith', 'https://i.imgur.com/9db4aGu.png'),
     User3('Bob Johnson', 'https://i.imgur.com/2TtxJCy.png'),

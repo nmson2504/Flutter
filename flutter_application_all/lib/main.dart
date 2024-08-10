@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_application_01/card.dart';
 import 'package:flutter_application_01/easyloading.dart';
 // import 'circularprogress.dart';
 import 'listview.dart';
@@ -12,6 +13,8 @@ import 'pageview.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'stack.dart';
 import 'stack2.dart';
+import 'demoUI1.dart';
+import 'decoratedbox.dart';
 import 'demoUI2.dart';
 import 'safearea.dart';
 import 'mediaquery.dart';
@@ -20,7 +23,7 @@ import 'box_vien_background.dart';
 import 'custom_paint.dart';
 
 void main() {
-  debugPrintGestureArenaDiagnostics = true;
+  // debugPrintGestureArenaDiagnostics = true;
   // changes app in this
   // runApp(const MyMenuAnchor());
   // WidgetsFlutterBinding.ensureInitialized();
