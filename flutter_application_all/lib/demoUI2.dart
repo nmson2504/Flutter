@@ -12,7 +12,7 @@ class MyDemoUI2 extends StatelessWidget {
           .copyWith(dragDevices: PointerDeviceKind.values.toSet()),
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter DemoUI2')),
-        body: const UserScreen(),
+        body:  const UserListScreen2(),
         // backgroundColor: Color.fromARGB(255, 235, 217, 163),
       ),
     );
@@ -226,4 +226,75 @@ class _UserScreenState extends State<UserScreen> {
       ),
     );
   }
+}
+
+// Example 3
+
+
+class UserListScreen2 extends StatelessWidget {
+ const UserListScreen2({super.key});
+
+  static  List<User3> users = [
+    User3('John Doe', 'https://i.imgur.com/h8uaAQr.png'),
+    User3('Jane Smith', 'https://i.imgur.com/9db4aGu.png'),
+    User3('Bob Johnson', 'https://i.imgur.com/2TtxJCy.png'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('User List'),
+      ),
+      body: ListView.builder(
+        itemCount: users.length,
+        itemBuilder: (context, index) {
+          return UserListItem(user: users[index]);
+        },
+      ),
+    );
+  }
+}
+
+class UserListItem extends StatelessWidget {
+  final User3 user;
+
+  const UserListItem({super.key, required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(user.avatarUrl),
+      ),
+      title: Text(user.name),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.thumb_up),
+            onPressed: () {},
+            tooltip: 'Like',
+          ),
+          IconButton(
+            icon: const Icon(Icons.arrow_forward),
+            onPressed: () {},
+            tooltip: 'Go',
+          ),
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            onPressed: () {},
+            tooltip: 'More',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class User3 {
+  final String name;
+  final String avatarUrl;
+
+  User3(this.name, this.avatarUrl);
 }

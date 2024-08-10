@@ -120,7 +120,7 @@ class MyButtonAppError1 extends StatelessWidget {
 
                 showDialog(
                     context: context,
-                    builder: (ctxt) => new AlertDialog(
+                    builder: (ctxt) => const AlertDialog(
                           title: const Text("Text Dialog"),
                         ));
               }),
@@ -139,7 +139,7 @@ class MyButtonAppError2 extends StatelessWidget {
       floatingActionButton: FloatingActionButton(onPressed: () {
         showDialog(
             context: context,
-            builder: (ctxt) => new AlertDialog(
+            builder: (ctxt) => const AlertDialog(
                   title: Text("Text Dialog"),
                 ));
       }),
@@ -165,11 +165,11 @@ class MyAppImpl extends StatelessWidget {
             onPressed: () {
               showDialog(
                   context: context,
-                  builder: (ctxt) => new AlertDialog(
+                  builder: (ctxt) => const AlertDialog(
                         title: Text("Text Dialog"),
                       ));
             },
-            child: Text('Text Button'),
+            child: const Text('Text Button'),
           ),
         ));
   }
@@ -192,17 +192,17 @@ class MyAppImpl1 extends StatelessWidget {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor:
-                  Color.fromARGB(255, 250, 253, 66), // cũ là primary
-              foregroundColor: Color.fromARGB(163, 14, 246, 2),
-              disabledBackgroundColor: Color.fromARGB(255, 223, 234, 238),
+                  const Color.fromARGB(255, 250, 253, 66), // cũ là primary
+              foregroundColor: const Color.fromARGB(163, 14, 246, 2),
+              disabledBackgroundColor: const Color.fromARGB(255, 223, 234, 238),
               disabledForegroundColor: const Color.fromARGB(221, 42, 29, 29),
               //  minimumSize: Size(110, 20),
               // maximumSize: Size(160, 20)
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               elevation: 10, // độ nổi (elevation) 3D so với nền
               shadowColor:
                   Colors.blue, // phải set elevation > 0 mới có tác dụng
-              side: BorderSide(
+              side: const BorderSide(
                 // viền button
                 color: Colors.blue,
                 width: 2.0,
@@ -238,7 +238,7 @@ class MyAppImpl1 extends StatelessWidget {
             },
 
             // onPressed: null, // disable button
-            child: Text('Elevated Button'),
+            child: const Text('Elevated Button'),
           ),
         ));
   }
@@ -261,9 +261,9 @@ class MyAppImpl3 extends StatelessWidget {
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               backgroundColor:
-                  Color.fromARGB(255, 250, 253, 66), // cũ là primary
+                  const Color.fromARGB(255, 250, 253, 66), // cũ là primary
               foregroundColor:
-                  Color.fromARGB(163, 14, 246, 2), // cũ là onPrimary
+                  const Color.fromARGB(163, 14, 246, 2), // cũ là onPrimary
 
               side: const BorderSide(
                 // viền button
@@ -333,7 +333,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         child: Center(
           child: IconButton(
-            icon: Icon(Icons.star),
+            icon: const Icon(Icons.star),
             onPressed: () {
               showDialog(
                 context: context,

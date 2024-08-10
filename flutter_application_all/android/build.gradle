@@ -11,6 +11,12 @@ buildscript {
     }
 }
 
+// plugins {
+//     id 'com.android.application'
+//     id 'com.android.library'
+//     id 'org.jetbrains.kotlin.android' // Add other plugins here if needed
+// }
+
 allprojects {
     repositories {
         google()
@@ -29,3 +35,4 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+

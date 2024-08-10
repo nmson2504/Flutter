@@ -13,6 +13,11 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'stack.dart';
 import 'stack2.dart';
 import 'demoUI2.dart';
+import 'safearea.dart';
+import 'mediaquery.dart';
+import 'fractionallysizedbox.dart';
+import 'box_vien_background.dart';
+import 'custom_paint.dart';
 
 void main() {
   debugPrintGestureArenaDiagnostics = true;
@@ -25,7 +30,7 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-  runApp(const MyDemoUI2());
+  runApp(const MyCustomPaint());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }
