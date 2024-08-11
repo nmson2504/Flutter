@@ -21,6 +21,7 @@ import 'mediaquery.dart';
 import 'fractionallysizedbox.dart';
 import 'box_vien_background.dart';
 import 'custom_paint.dart';
+import 'custom_paint2.dart';
 
 void main() {
   // debugPrintGestureArenaDiagnostics = true;
@@ -33,7 +34,7 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-  runApp(const MyCustomPaint());
+  runApp(const MyCustomPaint2());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }

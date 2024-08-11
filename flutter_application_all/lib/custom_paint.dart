@@ -7,7 +7,7 @@ class MyCustomPaint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyBox2b(),
+      home: MyBox2c(),
     );
   }
 }
@@ -21,6 +21,10 @@ Canvas có hệ thống tọa độ được mô tả: điểm gốc - origin (0
 Mọi nét vẽ đều sẽ liên qua đến điểm gốc - origin, nơi mà painter bắt đầu.
 + CustomPaint:
 Một widget cung cấp khung vẽ để truyền widget CustomPainter thực hiện hành động vẽ.
+.painter : 1 painter được vẽ trước khi child được vẽ.(nằm dưới child)
+.foregroundPainter: 1 painter được vẽ sau khi child được vẽ (đè lên trên child).
+.child: Theo mặc định, canvas sẽ lấy kích thước của child, nếu nó được xác định(có child thì canvas sẽ có cùng size với child.).
+.size: Nếu child không được khai báo, thì kích thước của canvas phải được chỉ định.
 
 + CustomPainter
 CustomPainter là một lớp trừu tượng trong Flutter, thực hiện hành động vẽ.
@@ -32,13 +36,24 @@ shouldRepaint(CustomPainter oldDelegate): Phương thức này quyết định k
 .drawLine - vẽ đường thẳng
 .drawRRect - vẽ rectangle bo tròn góc
 .drawPath - vẽ các đường dẫn (paths) lên canvas. Đường dẫn (path) là một chuỗi các điểm và đường được kết nối với nhau để tạo thành các hình dạng phức tạp. Bạn có thể sử dụng drawPath để tạo ra các hình dạng tùy chỉnh mà không bị giới hạn bởi các hình dạng cơ bản như hình chữ nhật, hình tròn, v.v.
+Phải khai báo 
+  Path path = Path();
+và vẽ với các method của path
+    path.moveTo(50, 50); // Điểm bắt đầu
+    path.lineTo(100, 50); // Vẽ một đường thẳng
+    path.lineTo(100, 100); // Vẽ một đường thẳng khác
+    path.close(); // Đóng đường dẫn để tạo thành một hình tam giác
+cuối cùng đưa path vào .drawPath
+    canvas.drawPath(path, paint); // Vẽ đường dẫn lên canvas
 .lineTo
 
 + Một số thược tính của Paint
 color - màu nền
 strokeWidth - độ dày viền, chỉ tác dụng khi style = PaintingStyle.stroke
+
++ Quan trọng
+ - Nên lấy toạ độ theo kích thước của canvas - size.width & size.height để hình vẽ luôn tỉ lệ theo canvas, ko bể layout 
  */
-//
 
 // vẽ với drawRect
 class MyBox1 extends StatelessWidget {
@@ -58,7 +73,7 @@ class MyBox1 extends StatelessWidget {
                 ),
               ),
               child: CustomPaint(
-                size: const Size(300, 300), // kích thước hình vẽ
+                size: const Size(300, 200), // kích thước hình vẽ
                 painter: MyRect01(),
               ),
             ),
@@ -70,7 +85,7 @@ class MyBox1 extends StatelessWidget {
                 ),
               ),
               child: CustomPaint(
-                size: const Size(300, 300), // kích thước hình vẽ
+                size: const Size(300, 200), // kích thước hình vẽ
                 painter: MyRect02(),
               ),
             ),
@@ -83,6 +98,18 @@ class MyBox1 extends StatelessWidget {
               ),
               child: CustomPaint(
                 size: const Size(300, 300), // kích thước hình vẽ
+                painter: MyRect03(),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black, // Màu viền
+                  width: 1.0, // Độ dày của viền
+                ),
+              ),
+              child: CustomPaint(
+                size: const Size(200, 100), // kích thước hình vẽ
                 painter: MyRect03(),
               ),
             ),
@@ -208,7 +235,7 @@ class MyBox2 extends StatelessWidget {
   }
 }
 
-// Hình vuông được căn giữa với kích thước bằng 1/2 kích thước của canvas.
+// Hình vuông được căn giữa với kích thước bằng 1/2 kích thước của canvas - .drawRect(Rect.fromCenter(
 class SquarePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -232,20 +259,6 @@ class SquarePainter extends CustomPainter {
 }
 
 //
-class MyBox2a extends StatelessWidget {
-  const MyBox2a({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CustomPaint(
-          size: const Size(200, 100),
-          painter: MyRect03(),
-        ),
-      ),
-    );
-  }
-}
 
 // Vẽ với .drawPath
 class MyBox2b extends StatelessWidget {
@@ -268,7 +281,7 @@ class MyBox2b extends StatelessWidget {
                 ),
               ),
               child: CustomPaint(
-                size: const Size(300, 300),
+                size: const Size(300, 200),
                 painter: MyDrawPath1(color: Colors.red, strokeWidth: 4.0),
                 // child: const Center(
                 //   child: Text(
@@ -292,6 +305,24 @@ class MyBox2b extends StatelessWidget {
               child: CustomPaint(
                 size: const Size(300, 300),
                 painter: MyDrawPath2(),
+                // child: const Center(
+                //   child: Text(
+                //     'Custom Paint with Border2',
+                //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                //   ),
+                // ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black, // Màu viền
+                  width: 1.0, // Độ dày của viền
+                ),
+              ),
+              child: CustomPaint(
+                size: const Size(300, 300),
+                painter: MyDrawPath3(),
                 // child: const Center(
                 //   child: Text(
                 //     'Custom Paint with Border2',
@@ -354,5 +385,171 @@ class MyDrawPath2 extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
+  }
+}
+
+// Đảm bảo tất cả các phép vẽ đều nằm trong size
+class MyDrawPath3 extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    // Đảm bảo tất cả các phép vẽ đều nằm trong size
+    // Ví dụ:
+    final paint = Paint()
+      ..color = Colors.blue
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(size.width, size.height);
+    path.moveTo(0, size.height);
+    path.lineTo(size.width, 0);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+// CustomPaint có child và không child
+class MyBox2c extends StatelessWidget {
+  const MyBox2c({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('CustomPaint Demo Child vs Not Child'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                border: Border.all(
+                  color: Colors.black, // Màu viền
+                  width: 1.0, // Độ dày của viền
+                ),
+              ),
+              // ClipRect > CustomPaint - cắt phần vưở quá không gian child of CustomPaint(Text)
+              child: CustomPaint(
+                // size: const Size(300, 300),
+                painter: SquarePainter(),
+                child: const Center(
+                  child: Text(
+                    'CustomPaint with child',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            FittedBox(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  border: Border.all(
+                    color: Colors.black, // Màu viền
+                    width: 1.0, // Độ dày của viền
+                  ),
+                ),
+                // ClipRect > CustomPaint - cắt phần vưở quá không gian child of CustomPaint(Text)
+                child: CustomPaint(
+                  // size: const Size(300, 300),
+                  painter: SquarePainter(),
+                  child: const Center(
+                    child: Text(
+                      'CustomPaint with child',
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                border: Border.all(
+                  color: Colors.black, // Màu viền
+                  width: 1.0, // Độ dày của viền
+                ),
+              ),
+              // ClipRect > CustomPaint - cắt phần vưở quá không gian child of CustomPaint(Text)
+              child: ClipRect(
+                child: CustomPaint(
+                  size: const Size(300, 300),
+                  painter: MyDrawPath2(),
+                  child: const Center(
+                    child: Text(
+                      'ClipRect > CustomPaint with child',
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1.0,
+                ),
+              ),
+              child: SizedBox(
+                width: 300,
+                height: 200,
+                child: CustomPaint(
+                  painter: MyDrawPath2(),
+                  child: const Center(
+                    child: Text(
+                      'SizedBox > CustomPaint with child',
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1.0,
+                ),
+              ),
+              child: SizedBox(
+                width: 400,
+                height: 200,
+                child: CustomPaint(
+                  painter: MyDrawPath2(),
+                  child: const Center(
+                    child: Text(
+                      'CustomPaint with child',
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
