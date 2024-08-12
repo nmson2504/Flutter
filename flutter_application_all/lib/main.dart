@@ -22,6 +22,10 @@ import 'fractionallysizedbox.dart';
 import 'box_vien_background.dart';
 import 'custom_paint.dart';
 import 'custom_paint2.dart';
+import 'textfield.dart';
+import 'container.dart';
+import 'container2.dart';
+import 'padding.dart';
 
 void main() {
   // debugPrintGestureArenaDiagnostics = true;
@@ -34,7 +38,7 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-  runApp(const MyCustomPaint2());
+  runApp(const MyPadding());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }
