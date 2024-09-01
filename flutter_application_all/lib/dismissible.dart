@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class MyDismissible extends StatelessWidget {
@@ -8,7 +9,7 @@ class MyDismissible extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter Dismissible')),
-        body: const Dismissible04(),
+        body: const Dismissible02(),
         // backgroundColor: Color.fromARGB(255, 235, 217, 163),
       ),
     );
@@ -55,6 +56,7 @@ class _DismissibleExampleState extends State<Dismissible01> {
 }
 
 // Example 2 - Delete items from list 2
+//  StatelessWidget setState(() ko lỗi index, chỉ remove items trên UI, ko update DB
 class Dismissible02 extends StatelessWidget {
   const Dismissible02({super.key});
   static List<String> items = [
@@ -79,7 +81,7 @@ class Dismissible02 extends StatelessWidget {
           key: Key(item),
           onDismissed: (direction) {
             // Remove the item from the data source
-            items.removeAt(index);
+
             // Show a snackbar with the item name
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -96,6 +98,114 @@ class Dismissible02 extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  void setState(Null Function() param0) {}
+}
+
+// StatefulWidget - setState update data not lỗi index
+class Dismissible02a extends StatefulWidget {
+  const Dismissible02a({super.key});
+
+  @override
+  _DismissibleListState createState() => _DismissibleListState();
+}
+
+class _DismissibleListState extends State<Dismissible02a> {
+  // Initialize the list with some items
+  List<String> items = List.generate(10, (index) => 'Item $index');
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Dismissible List'),
+      ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          return Dismissible(
+            key: Key(item),
+            onDismissed: (direction) {
+              // setState giúp đảm bảo rằng các thay đổi trong danh sách items được đồng bộ hóa với giao diện người dùng, giúp tránh lỗi RangeError.
+              setState(() {
+                // Remove the item from the data source
+                items.removeAt(index);
+              });
+              // Show a snackbar with the item name
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('$item dismissed'),
+                ),
+              );
+            },
+            background: Container(
+              color: Colors.red,
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
+            child: ListTile(
+              title: Text(item),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// StatelessWidget - delete on DB
+// ValueListenableBuilder theo dõi ValueNotifier và cập nhật giao diện khi ValueNotifier.value thay đổi.
+/* 
+Khởi Tạo: ValueNotifier là một lớp trong Flutter giúp bạn quản lý và theo dõi sự thay đổi của một giá trị. Khi giá trị của ValueNotifier thay đổi, tất cả các widget hoặc listener đăng ký sẽ được thông báo và cập nhật giao diện.
+Cập Nhật Giá Trị: Bạn có thể cập nhật giá trị của ValueNotifier thông qua thuộc tính value. Mọi thay đổi giá trị sẽ kích hoạt các listener đã đăng ký với ValueNotifier.
+Khi ValueListenableBuilder nhận được giá trị mới từ _itemsNotifier, nó sẽ xây dựng lại ListView.builder với danh sách mới.
+ */
+class Dismissible02b extends StatelessWidget {
+  Dismissible02b({super.key});
+  final ValueNotifier<List<String>> _itemsNotifier =
+      ValueNotifier(List.generate(11, (index) => 'Item $index'));
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Dismissible02b List'),
+      ),
+      body: ValueListenableBuilder<List<String>>(
+        valueListenable: _itemsNotifier,
+        builder: (context, items, child) {
+          return ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return Dismissible(
+                key: Key(item),
+                onDismissed: (direction) {
+                  items.removeAt(index);
+                  // Notify listeners about the change
+                  _itemsNotifier.value = List.from(
+                      items); // cập nhật list sau khi xoá item vào _itemsNotifier
+                  // Show a snackbar with the item name
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('$item dismissed'),
+                    ),
+                  );
+                },
+                background: Container(
+                  color: Colors.red,
+                  child: const Icon(Icons.delete, color: Colors.white),
+                ),
+                child: ListTile(
+                  title: Text(item),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -190,6 +300,7 @@ class Dismissible04 extends StatelessWidget {
       itemBuilder: (context, index) {
         final item = items[index];
         return Dismissible(
+          // dragStartBehavior: DragStartBehavior.start,
           key: Key(item),
           onDismissed: (direction) {
             // Remove the item from the data source

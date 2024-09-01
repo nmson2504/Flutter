@@ -9,7 +9,7 @@ class MyGesture extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('Flutter GestureDetector')),
-        body: const Gesture01A(),
+        body: const Gesture02(),
         // backgroundColor: Color.fromARGB(255, 235, 217, 163),
       ),
     );

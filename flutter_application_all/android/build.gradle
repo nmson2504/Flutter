@@ -17,6 +17,12 @@ buildscript {
 //     id 'org.jetbrains.kotlin.android' // Add other plugins here if needed
 // }
 
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'  // Nếu bạn sử dụng Firebase
+}
+
 allprojects {
     repositories {
         google()

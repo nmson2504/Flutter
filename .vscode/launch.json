@@ -85,6 +85,72 @@
             "flutterMode": "release"
         },
         {
+            "name": "sqflite",
+            "cwd": "sqflite",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "sqflite_01",
+            "cwd": "sqflite_01",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "sqflite_01 (profile mode)",
+            "cwd": "sqflite_01",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "sqflite_01 (release mode)",
+            "cwd": "sqflite_01",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "bmi_calculator",
+            "cwd": "custom_widget\\bmi_calculator",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "bmi_calculator (profile mode)",
+            "cwd": "custom_widget\\bmi_calculator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "bmi_calculator (release mode)",
+            "cwd": "custom_widget\\bmi_calculator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter_Custom_Widget",
+            "cwd": "custom_widget\\Flutter_Custom_Widget",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Flutter_Custom_Widget (profile mode)",
+            "cwd": "custom_widget\\Flutter_Custom_Widget",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Flutter_Custom_Widget (release mode)",
+            "cwd": "custom_widget\\Flutter_Custom_Widget",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
             "name": "easyloading_nms",
             "cwd": "easyloading_nms\\easyloading_nms",
             "request": "launch",
