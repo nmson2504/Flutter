@@ -10,7 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: DemoInherited(),
+      home: MyHomePage2(
+        isLoading: false,
+        counter: 0,
+        child: MyCenterWidget(),
+      ),
     );
   }
 }
@@ -144,19 +148,197 @@ class MyInheritedWidget extends InheritedWidget {
   final Function increment;
 
   const MyInheritedWidget({
-    Key? key,
-    required Widget child,
+    super.key,
+    required super.child,
     required this.counter,
     required this.increment,
-  }) : super(key: key, child: child);
+  });
 // Phương thức of dùng để truy cập MyInheritedWidget từ context.
   static MyInheritedWidget? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<MyInheritedWidget>();
   }
 
-// updateShouldNotify được gọi khi widget cần cập nhật. Nó trả về true nếu giá trị counter thay đổi.
+// updateShouldNotify return false - ko update các widget con, return true - update các widget con khi có thay đổi
+// Ơ đây Nó trả về true nếu giá trị counter thay đổi.
+/* oldWidget: Đây là một phiên bản của MyInheritedWidget mà widget hiện tại đã thay thế. Nó chứa trạng thái và dữ liệu cũ trước khi widget được cập nhật. */
   @override
   bool updateShouldNotify(MyInheritedWidget oldWidget) {
-    return counter != oldWidget.counter;
+    return counter !=
+        oldWidget
+            .counter; // return true khi oldWidget.counter thay đổi -> thông báo cho các widget thừa kế có liên quan build lại
+  }
+}
+
+// Demo giải thích chi tiết cơ chế hoạt động của InheritedWidget
+// https://viblo.asia/p/hoc-flutter-tu-co-ban-den-nang-cao-phan-4-lot-tran-inheritedwidget-3P0lPDbmlox
+// call MyHomePage(isLoading: false, counter: 0),
+class MyHomePage extends StatefulWidget {
+  final bool isLoading;
+  final int counter;
+
+  const MyHomePage({
+    super.key,
+    required this.isLoading,
+    required this.counter,
+  });
+
+  @override
+  State<MyHomePage> createState() {
+    return MyHomePageState();
+  }
+}
+
+class MyHomePageState extends State<MyHomePage> {
+  late bool _isLoading;
+  late int _counter;
+
+  @override
+  void initState() {
+    super.initState();
+    _isLoading = widget.isLoading;
+    _counter = widget.counter;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('rebuild MyHomePage');
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('MyInheritedWidgetDM Demo'),
+      ),
+      body: MyInheritedWidgetDM(
+        isLoading: _isLoading,
+        counter: _counter,
+        child: const MyCenterWidget(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: onFloatingButtonClicked,
+      ),
+    );
+  }
+
+  void onFloatingButtonClicked() {
+    // print('Button clicked!. Call setState method');
+    setState(() {
+      _counter++;
+      if (_counter % 2 == 0) {
+        _isLoading = false;
+      } else {
+        _isLoading = true;
+      }
+    });
+  }
+}
+
+class CounterWidget extends StatelessWidget {
+  const CounterWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    print('rebuild CounterWidget');
+    final myInheritedWidget = MyInheritedWidgetDM.of(context);
+
+    if (myInheritedWidget == null) {
+      return const Text('MyInheritedWidget was not found');
+    }
+
+    return myInheritedWidget.isLoading ? const CircularProgressIndicator() : Text('${myInheritedWidget.counter}');
+  }
+}
+
+class MyCenterWidget extends StatelessWidget {
+  const MyCenterWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    /* 
+    MyCenterWidget ko gọi MyInheritedWidgetDM.of(context); - ko lệ thuộc MyInheritedWidgetDM nên sẽ ko rebuild khi MyInheritedWidgetDM thay đổi(giải thích tại https://viblo.asia/p/hoc-flutter-tu-co-ban-den-nang-cao-phan-4-lot-tran-inheritedwidget-3P0lPDbmlox nhầm chỗ này)
+     */
+    print('rebuild MyCenterWidget');
+    return const Center(
+      child: CounterWidget(),
+    );
+  }
+}
+
+class MyInheritedWidgetDM extends InheritedWidget {
+  final int counter;
+  final bool isLoading;
+  final Widget child;
+
+  const MyInheritedWidgetDM({
+    super.key,
+    required this.isLoading,
+    required this.counter,
+    required this.child,
+  }) : super(child: child);
+
+  @override
+  bool updateShouldNotify(MyInheritedWidgetDM oldWidget) {
+    return isLoading != oldWidget.isLoading || counter != oldWidget.counter;
+  }
+
+  static MyInheritedWidgetDM? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<MyInheritedWidgetDM>();
+  }
+}
+
+//
+// call  MyHomePage(isLoading: false,counter: 0, child: MyCenterWidget(),),
+class MyHomePage2 extends StatefulWidget {
+  final bool isLoading;
+  final int counter;
+  final Widget child;
+
+  const MyHomePage2({
+    super.key,
+    required this.isLoading,
+    required this.counter,
+    required this.child,
+  });
+
+  @override
+  State<MyHomePage2> createState() {
+    return MyHomePage2State();
+  }
+}
+
+class MyHomePage2State extends State<MyHomePage2> {
+  late bool _isLoading;
+  late int _counter;
+
+  @override
+  void initState() {
+    super.initState();
+    _isLoading = widget.isLoading; //  Truy cập thuộc tính isLoading của widget cha (MyHomePage2).
+    _counter = widget.counter;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('rebuild MyHomePage');
+    return Scaffold(
+      body: MyInheritedWidgetDM(
+        isLoading: _isLoading,
+        counter: _counter,
+        child: widget
+            .child, //  Truy cập thuộc tính child của widget cha (MyHomePage2) - là tham số MyCenterWidget khi call MyHomePage2
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: onFloatingButtonClicked,
+      ),
+    );
+  }
+
+  void onFloatingButtonClicked() {
+    // print('Button clicked!. Call setState method');
+    setState(() {
+      _counter++;
+      if (_counter % 2 == 0) {
+        _isLoading = false;
+      } else {
+        _isLoading = true;
+      }
+    });
   }
 }
