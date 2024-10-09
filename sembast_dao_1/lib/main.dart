@@ -78,9 +78,7 @@ class _UserListScreenState extends State<UserListScreen> {
               padding: EdgeInsets.symmetric(vertical: 8.0),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context)
-                      .size
-                      .width, // Giới hạn chiều rộng tổng thể
+                  maxWidth: MediaQuery.of(context).size.width, // Giới hạn chiều rộng tổng thể
                 ),
                 child: Table(
                   defaultColumnWidth: FlexColumnWidth(),
@@ -110,11 +108,9 @@ class _UserListScreenState extends State<UserListScreen> {
             ),
             Expanded(
               child: ConstrainedBox(
-                constraints:
-                    BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
                 child: ListView.builder(
-                  shrinkWrap:
-                      true, // Cho phép ListView tính toán kích thước dựa trên các phần tử con
+                  shrinkWrap: true, // Cho phép ListView tính toán kích thước dựa trên các phần tử con
                   // physics:
                   // NeverScrollableScrollPhysics(), // Vô hiệu hóa việc cuộn dọc trong ListView
                   itemCount: _users.length,
@@ -136,14 +132,12 @@ class _UserListScreenState extends State<UserListScreen> {
                           children: [
                             TableCell(
                               child: Checkbox(
-                                checkColor:
-                                    const Color.fromARGB(255, 75, 218, 236),
+                                checkColor: const Color.fromARGB(255, 75, 218, 236),
                                 activeColor: Colors.brown,
                                 value: user.check,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    user.check = value ??
-                                        false; // update UI, non update DB
+                                    user.check = value ?? false; // update UI, non update DB
                                   });
                                   _updateCheckState();
                                 },
@@ -151,25 +145,20 @@ class _UserListScreenState extends State<UserListScreen> {
                             ),
                             TableCell(
                               child: Checkbox(
-                                value: user
-                                    .VIP, // Thay thế với thuộc tính thích hợp
+                                value: user.VIP, // Thay thế với thuộc tính thích hợp
                                 onChanged: (bool? value) {
                                   setState(() {
                                     user.VIP = value ?? false;
                                     // có thể update DB luôn nếu muốn, tuy nhiên chỉ nên update 1 lần thay vì với mỗi hành động click on checkbox
-                                    widget.userDao
-                                        .updateUser(user); // update in DB -
+                                    widget.userDao.updateUser(user); // update in DB -
                                     // _loadUsers();
                                   });
                                   coundVIP += (value == true) ? 1 : -1;
                                 },
                               ),
                             ),
-                            TableCell(
-                                child: Center(
-                                    child: Text('${index + 1} ${user.name}'))),
-                            TableCell(
-                                child: Center(child: Text('${user.age}'))),
+                            TableCell(child: Center(child: Text('${index + 1} ${user.name}'))),
+                            TableCell(child: Center(child: Text('${user.age}'))),
                             TableCell(
                               child: IconButton(
                                 icon: Icon(Icons.edit),
@@ -188,21 +177,16 @@ class _UserListScreenState extends State<UserListScreen> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             TextField(
-                                              controller: TextEditingController(
-                                                  text: newName),
-                                              decoration: InputDecoration(
-                                                  labelText: 'Name'),
+                                              controller: TextEditingController(text: newName),
+                                              decoration: InputDecoration(labelText: 'Name'),
                                               onChanged: (value) {
                                                 newName = value;
                                               },
                                             ),
                                             TextField(
-                                              controller: TextEditingController(
-                                                  text: newAge),
-                                              decoration: InputDecoration(
-                                                  labelText: 'Age'),
-                                              keyboardType:
-                                                  TextInputType.number,
+                                              controller: TextEditingController(text: newAge),
+                                              decoration: InputDecoration(labelText: 'Age'),
+                                              keyboardType: TextInputType.number,
                                               onChanged: (value) {
                                                 newAge = value;
                                               },
@@ -213,19 +197,18 @@ class _UserListScreenState extends State<UserListScreen> {
                                           TextButton(
                                             child: Text('Cancel'),
                                             onPressed: () {
-                                              Navigator.of(context)
-                                                  .pop(); // Close the dialog
+                                              Navigator.of(context).pop(); // Close the dialog
+                                              // đóng hộp thoại mà không trả về bất kỳ giá trị nào. Kết quả là, biến updatedUser sẽ nhận giá trị null
                                             },
                                           ),
                                           TextButton(
                                             child: Text('Update'),
+                                            // Lệnh Navigator.of(context).pop(User(...)) (trong nút "Update") đóng hộp thoại và trả về một đối tượng User mới với thông tin đã chỉnh sửa, gán vào biến updatedUser
                                             onPressed: () {
                                               Navigator.of(context).pop(User(
                                                 id: user.id,
-                                                name: newName ?? user.name,
-                                                age: int.tryParse(
-                                                        newAge ?? '') ??
-                                                    user.age,
+                                                name: newName ?? user.name, // return right side if left side is null
+                                                age: int.tryParse(newAge ?? '') ?? user.age,
                                                 VIP: user.VIP,
                                                 check: user.check,
                                               ));
@@ -238,8 +221,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
                                   if (updatedUser != null) {
                                     // Update the user in the database
-                                    await widget.userDao
-                                        .updateUser(updatedUser);
+                                    await widget.userDao.updateUser(updatedUser);
                                     _loadUsers(); // Refresh the list
                                   }
                                 },
@@ -256,21 +238,18 @@ class _UserListScreenState extends State<UserListScreen> {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         title: Text('Delete Confirmation'),
-                                        content: Text(
-                                            'Are you sure you want to delete ${user.name}?'),
+                                        content: Text('Are you sure you want to delete ${user.name}?'),
                                         actions: [
                                           TextButton(
                                             child: Text('Cancel'),
                                             onPressed: () {
-                                              Navigator.of(context).pop(
-                                                  false); // Dismiss the dialog
+                                              Navigator.of(context).pop(false); // Dismiss the dialog
                                             },
                                           ),
                                           TextButton(
                                             child: Text('Delete'),
                                             onPressed: () {
-                                              Navigator.of(context).pop(
-                                                  true); // Confirm the deletion
+                                              Navigator.of(context).pop(true); // Confirm the deletion
                                             },
                                           ),
                                         ],
@@ -320,8 +299,7 @@ class _UserListScreenState extends State<UserListScreen> {
                 debugPrint('Delete VIP pressed');
                 final finder = Finder(filter: Filter.equals('VIP', true));
                 // deleteUsersFilter là hàm từ \lib\dao\dao_impl.dart
-                var countDelete =
-                    await widget.userDao.deleteUsersFilter(finder);
+                var countDelete = await widget.userDao.deleteUsersFilter(finder);
                 debugPrint('Đã xoá $countDelete users');
                 _loadUsers();
               },
@@ -383,8 +361,7 @@ class _UserListScreenState extends State<UserListScreen> {
     setState(() {
       int checkedCount = _users.where((user) => user.check).length;
       _isAllChecked = checkedCount == _users.length;
-      countCheck =
-          checkedCount; // Cập nhật countCheck dựa trên số items đã check
+      countCheck = checkedCount; // Cập nhật countCheck dựa trên số items đã check
     });
   }
 }

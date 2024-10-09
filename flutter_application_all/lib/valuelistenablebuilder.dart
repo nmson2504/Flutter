@@ -1,18 +1,37 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:device_preview/device_preview.dart';
 
 class MyValueListenableBuilder extends StatelessWidget {
   const MyValueListenableBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var mapC = {
+      1: () => const ValueListenableBuilder01(),
+      2: () => ValueListenableBuilder01a(),
+      3: () => const ValueListenableBuilder02(),
+      4: () => const ValueListenableBuilder03(),
+      5: () => ValueListenableBuilder04(),
+      6: () => const ValueListenableBuilder04b(),
+      7: () => const ValueListenableBuilder05(),
+      // 9: () => const HeroPlaceholderDemoApp(),
+      // 10: () => const BasicHeroAnimation3(),
+    };
+    int n = 7; // Giá trị n có thể thay đổi
+    // Kiểm tra nếu map chứa key n
+    Widget bodyWidget;
+    if (mapC.containsKey(n)) {
+      bodyWidget = mapC[n]!(); // Gọi hàm trả về Widget
+    } else {
+      bodyWidget = const Center(child: Text('Không tìm thấy widget'));
+    }
+
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Flutter ValueListenableBuilder')),
-        body: const ValueListenableBuilder05(),
-        // backgroundColor: Color.fromARGB(255, 235, 217, 163),
-      ),
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      home: bodyWidget, // Truyền Widget vào body
     );
   }
 }
@@ -45,37 +64,19 @@ class ValueListenableBuilder01 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: remainingSeconds,
-      builder: (context, value, child) {
-        return Text('Còn lại: $value giây');
-      },
-    );
-  }
-}
-
-class ValueListenableBuilder011 extends StatelessWidget {
-  static ValueNotifier<int> remainingSeconds = ValueNotifier(60);
-
-  const ValueListenableBuilder011({super.key});
-
-  static void startCountdown() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (remainingSeconds.value > 0) {
-        remainingSeconds.value--;
-      } else {
-        timer.cancel();
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: remainingSeconds,
-      builder: (context, value, child) {
-        return Text('Còn lại: $value giây');
-      },
+    ValueListenableBuilder01.startCountdown();
+    return Scaffold(
+      body: Center(
+        child: ValueListenableBuilder(
+          valueListenable: remainingSeconds,
+          builder: (context, value, child) {
+            return Text(
+              'Còn lại: $value giây',
+              style: const TextStyle(fontSize: 20),
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -98,11 +99,15 @@ class ValueListenableBuilder01a extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: remainingSeconds,
-      builder: (context, value, child) {
-        return Text('ValueListenableBuilder01a - Còn lại: $value giây');
-      },
+    return Scaffold(
+      body: Center(
+        child: ValueListenableBuilder(
+          valueListenable: remainingSeconds,
+          builder: (context, value, child) {
+            return Text('ValueListenableBuilder01a - Còn lại: $value giây');
+          },
+        ),
+      ),
     );
   }
 }
@@ -112,8 +117,7 @@ class ValueListenableBuilder02 extends StatefulWidget {
   const ValueListenableBuilder02({super.key});
 
   @override
-  State<ValueListenableBuilder02> createState() =>
-      _ValueListenableBuilder02State();
+  State<ValueListenableBuilder02> createState() => _ValueListenableBuilder02State();
 }
 
 class _ValueListenableBuilder02State extends State<ValueListenableBuilder02> {
@@ -160,8 +164,7 @@ class ValueListenableBuilder03 extends StatefulWidget {
   const ValueListenableBuilder03({super.key});
 
   @override
-  State<ValueListenableBuilder03> createState() =>
-      _ValueListenableBuilder03State();
+  State<ValueListenableBuilder03> createState() => _ValueListenableBuilder03State();
 }
 
 class _ValueListenableBuilder03State extends State<ValueListenableBuilder03> {
@@ -211,9 +214,7 @@ class _ValueListenableBuilder03State extends State<ValueListenableBuilder03> {
               valueListenable: isSubmitted,
               builder: (context, value, child) {
                 return Text(
-                  value
-                      ? 'Form has been submitted'
-                      : 'Form has not been submitted',
+                  value ? 'Form has been submitted' : 'Form has not been submitted',
                   style: const TextStyle(fontSize: 18),
                 );
               },
@@ -256,9 +257,7 @@ class ValueListenableBuilder04 extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Thay đổi giá trị của _colorNotifier khi nhấn nút
-                _colorNotifier.value =
-                    Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                        .withOpacity(1.0);
+                _colorNotifier.value = Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
               },
               child: const Text('Change Color'),
             ),
@@ -274,8 +273,7 @@ class ValueListenableBuilder04b extends StatefulWidget {
   const ValueListenableBuilder04b({super.key});
 
   @override
-  _ValueListenableBuilder04bState createState() =>
-      _ValueListenableBuilder04bState();
+  _ValueListenableBuilder04bState createState() => _ValueListenableBuilder04bState();
 }
 
 class _ValueListenableBuilder04bState extends State<ValueListenableBuilder04b> {
@@ -314,9 +312,7 @@ class _ValueListenableBuilder04bState extends State<ValueListenableBuilder04b> {
             ElevatedButton(
               onPressed: () {
                 // Thay đổi giá trị của _colorNotifier khi nhấn nút
-                _colorNotifier.value =
-                    Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                        .withOpacity(1.0);
+                _colorNotifier.value = Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
               },
               child: const Text('Change Color'),
             ),
@@ -333,8 +329,7 @@ class ValueListenableBuilder05 extends StatefulWidget {
   const ValueListenableBuilder05({super.key});
 
   @override
-  State<ValueListenableBuilder05> createState() =>
-      _ValueListenableBuilder05State();
+  State<ValueListenableBuilder05> createState() => _ValueListenableBuilder05State();
 }
 
 class _ValueListenableBuilder05State extends State<ValueListenableBuilder05> {

@@ -15,10 +15,12 @@ class User {
     this.VIP = true,
   });
 
+// convert object User to Map
   Map<String, dynamic> toMap() {
     return {'id': id, 'name': name, 'age': age, 'check': check, 'VIP': VIP};
   }
 
+// convert Map to object User
   static User fromMap(Map<String, dynamic> map) {
     return User(
         id: map['id'] as int,

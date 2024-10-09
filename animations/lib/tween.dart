@@ -65,8 +65,7 @@ class _DemoTween1State extends State<DemoTween1> with TickerProviderStateMixin {
 }
 
 class PositionTransitionWidget extends AnimatedWidget {
-  const PositionTransitionWidget(
-      {Key? key, required Animation<Offset> animation})
+  const PositionTransitionWidget({Key? key, required Animation<Offset> animation})
       : super(key: key, listenable: animation);
 
   @override
@@ -93,8 +92,7 @@ class DemoTween2 extends StatefulWidget {
 }
 
 // TickerProviderStateMixin cung cấp TickerProvider - Ticker cho AnimationController để điều khiển thời gian của animation.
-class _DemoTween2State extends State<DemoTween2>
-    with SingleTickerProviderStateMixin {
+class _DemoTween2State extends State<DemoTween2> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Color?> _animation;
 
@@ -105,11 +103,10 @@ class _DemoTween2State extends State<DemoTween2>
       duration: const Duration(seconds: 2),
       vsync: this,
     );
-    _animation =
-        ColorTween(begin: Colors.black, end: Colors.red).animate(_controller)
-          ..addListener(() {
-            setState(() {});
-          });
+    _animation = ColorTween(begin: Colors.black, end: Colors.red).animate(_controller)
+      ..addListener(() {
+        setState(() {});
+      });
     _controller.repeat(reverse: true);
   }
 
@@ -147,6 +144,7 @@ class _DemoTween2State extends State<DemoTween2>
 }
 
 // Một Tween dùnG cho 2 Animation
+// gọi PositionTransitionWidget3 truyền 2 animation cho Listenable 2 lần cho
 class DemoTween3 extends StatefulWidget {
   const DemoTween3({super.key});
 
@@ -194,6 +192,7 @@ class _DemoTween3State extends State<DemoTween3> with TickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            // gọi PositionTransitionWidget3 truyền 2 animation cho Listenable 2 lần cho
             PositionTransitionWidget3(animation: _animation1),
             PositionTransitionWidget3(animation: _animation2),
           ],
@@ -204,8 +203,7 @@ class _DemoTween3State extends State<DemoTween3> with TickerProviderStateMixin {
 }
 
 class PositionTransitionWidget3 extends AnimatedWidget {
-  const PositionTransitionWidget3(
-      {Key? key, required Animation<Offset> animation})
+  const PositionTransitionWidget3({Key? key, required Animation<Offset> animation})
       : super(key: key, listenable: animation);
 
   @override
@@ -230,8 +228,7 @@ class DemoTween3A extends StatefulWidget {
   State<DemoTween3A> createState() => _DemoTween3AState();
 }
 
-class _DemoTween3AState extends State<DemoTween3A>
-    with TickerProviderStateMixin {
+class _DemoTween3AState extends State<DemoTween3A> with TickerProviderStateMixin {
   late AnimationController _controller1;
   late AnimationController _controller2;
   late Animation<double> _animation1;
@@ -336,21 +333,14 @@ class _DemoTween4State extends State<DemoTween4> with TickerProviderStateMixin {
 
     // Tạo các Tween và liên kết chúng với nhau
     _sizeAnimation = TweenSequence([
-      TweenSequenceItem(
-          tween: Tween(begin: 50.0, end: 200.0),
-          weight: 0.2), // Tăng kích thước
-      TweenSequenceItem(
-          tween: Tween(begin: 200.0, end: 50.0),
-          weight: 0.2), // Giảm kích thước
+      TweenSequenceItem(tween: Tween(begin: 50.0, end: 200.0), weight: 0.2), // Tăng kích thước
+      TweenSequenceItem(tween: Tween(begin: 200.0, end: 50.0), weight: 0.2), // Giảm kích thước
     ]).animate(_controller);
 
     _colorAnimation = TweenSequence([
+      TweenSequenceItem(tween: ColorTween(begin: Colors.red, end: Colors.blue), weight: 50), // Đổi màu từ đỏ sang xanh
       TweenSequenceItem(
-          tween: ColorTween(begin: Colors.red, end: Colors.blue),
-          weight: 50), // Đổi màu từ đỏ sang xanh
-      TweenSequenceItem(
-          tween: ColorTween(begin: Colors.blue, end: Colors.green),
-          weight: 50), // Đổi màu từ xanh sang xanh lá
+          tween: ColorTween(begin: Colors.blue, end: Colors.green), weight: 50), // Đổi màu từ xanh sang xanh lá
     ]).animate(_controller);
 
     _controller.forward();
@@ -444,11 +434,8 @@ class _DemoTween5State extends State<DemoTween5> with TickerProviderStateMixin {
 
     _colorAnimation = TweenSequence(
       [
-        TweenSequenceItem(
-            tween: ColorTween(begin: Colors.red, end: Colors.blue), weight: 50),
-        TweenSequenceItem(
-            tween: ColorTween(begin: Colors.blue, end: Colors.green),
-            weight: 50),
+        TweenSequenceItem(tween: ColorTween(begin: Colors.red, end: Colors.blue), weight: 50),
+        TweenSequenceItem(tween: ColorTween(begin: Colors.blue, end: Colors.green), weight: 50),
       ],
     ).animate(_colorController);
 
@@ -522,8 +509,7 @@ class _DemoTween6State extends State<DemoTween6> with TickerProviderStateMixin {
     );
 
     // Define the second part of the animation
-    _colorAnimation2 =
-        ColorTween(begin: Colors.blue, end: Colors.yellow).animate(
+    _colorAnimation2 = ColorTween(begin: Colors.blue, end: Colors.yellow).animate(
       CurvedAnimation(
         parent: _controller,
         curve: const Interval(0.5, 1.0, curve: Curves.linear),
@@ -543,8 +529,7 @@ class _DemoTween6State extends State<DemoTween6> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-              'Hai Tween run 2 Animation tuần tự(ko dùng TweenSequence)'),
+          title: const Text('Hai Tween run 2 Animation tuần tự(ko dùng TweenSequence)'),
         ),
         body: Center(
           child: AnimatedBuilder(
@@ -594,16 +579,12 @@ class _DemoTween7State extends State<DemoTween7> with TickerProviderStateMixin {
 
     final tween1 = Tween<double>(begin: 0.0, end: 1.0);
     final tween2 = Tween<double>(begin: 2.0, end: 0.0);
-   
 
-    _animation = _controller.drive(
-      tween1.chain(tween2));
-  // final tween1 = Tween<double>(begin: 0.0, end: 1.0);
+    _animation = _controller.drive(tween1.chain(tween2));
+    // final tween1 = Tween<double>(begin: 0.0, end: 1.0);
     // final tween2 = Tween<double>(begin: 1.0, end: 2.0);
-      // tween2.chain(tween1)); - 100 to 200
-      // tween1.chain(tween2)); - 100 to 200
-
-    
+    // tween2.chain(tween1)); - 100 to 200
+    // tween1.chain(tween2)); - 100 to 200
 
     _controller.forward();
   }
@@ -618,8 +599,7 @@ class _DemoTween7State extends State<DemoTween7> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-              'Hai Tween run 2 Animation tuần tự dùng chain method(ko dùng TweenSequence)'),
+          title: const Text('Hai Tween run 2 Animation tuần tự dùng chain method(ko dùng TweenSequence)'),
         ),
         body: Center(
           child: Row(
@@ -629,7 +609,7 @@ class _DemoTween7State extends State<DemoTween7> with TickerProviderStateMixin {
                 animation: _animation,
                 builder: (context, child) {
                   return Container(
-                    width: 10 ,
+                    width: 10,
                     height: 100 * _animation.value,
                     color: Colors.blue,
                   );
@@ -649,7 +629,7 @@ class _DemoTween7State extends State<DemoTween7> with TickerProviderStateMixin {
                 animation: _animation,
                 builder: (context, child) {
                   return Container(
-                   width: 10,
+                    width: 10,
                     height: 200,
                     color: Colors.blue,
                   );
@@ -659,7 +639,7 @@ class _DemoTween7State extends State<DemoTween7> with TickerProviderStateMixin {
                 animation: _animation,
                 builder: (context, child) {
                   return Container(
-                   width: 10,
+                    width: 10,
                     height: 400,
                     color: Colors.blue,
                   );
@@ -669,7 +649,7 @@ class _DemoTween7State extends State<DemoTween7> with TickerProviderStateMixin {
                 animation: _animation,
                 builder: (context, child) {
                   return Container(
-                   width: 10,
+                    width: 10,
                     height: 600,
                     color: Colors.blue,
                   );

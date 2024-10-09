@@ -8,8 +8,7 @@ class AnimatedWidget01 extends StatefulWidget {
   _AnimatedWidget01State createState() => _AnimatedWidget01State();
 }
 
-class _AnimatedWidget01State extends State<AnimatedWidget01>
-    with SingleTickerProviderStateMixin {
+class _AnimatedWidget01State extends State<AnimatedWidget01> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -20,7 +19,7 @@ class _AnimatedWidget01State extends State<AnimatedWidget01>
       duration: const Duration(seconds: 2),
       vsync: this,
     );
-    _animation = Tween<double>(begin: 0, end: 300).animate(_controller);
+    _animation = Tween<double>(begin: 0, end: 200).animate(_controller);
     _controller.repeat(reverse: true);
   }
 
@@ -42,8 +41,7 @@ class _AnimatedWidget01State extends State<AnimatedWidget01>
 /* Lớp widget hoạt hình kế thừa từ AnimatedWidget và override phương thức build. */
 
 class MyAnimatedWidget extends AnimatedWidget {
-  const MyAnimatedWidget({Key? key, required Animation<double> animation})
-      : super(key: key, listenable: animation);
+  const MyAnimatedWidget({Key? key, required Animation<double> animation}) : super(key: key, listenable: animation);
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +57,7 @@ class MyAnimatedWidget extends AnimatedWidget {
 // Example 2
 
 class SizeAnimatedWidget extends AnimatedWidget {
-  const SizeAnimatedWidget({Key? key, required Animation<double> animation})
-      : super(key: key, listenable: animation);
+  const SizeAnimatedWidget({Key? key, required Animation<double> animation}) : super(key: key, listenable: animation);
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +77,7 @@ class AnimatedWidget02 extends StatefulWidget {
   _AnimatedWidget02State createState() => _AnimatedWidget02State();
 }
 
-class _AnimatedWidget02State extends State<AnimatedWidget02>
-    with SingleTickerProviderStateMixin {
+class _AnimatedWidget02State extends State<AnimatedWidget02> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -137,8 +133,7 @@ class AnimatedWidget03 extends StatefulWidget {
   _AnimatedWidget03State createState() => _AnimatedWidget03State();
 }
 
-class _AnimatedWidget03State extends State<AnimatedWidget03>
-    with SingleTickerProviderStateMixin {
+class _AnimatedWidget03State extends State<AnimatedWidget03> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -171,8 +166,7 @@ class _AnimatedWidget03State extends State<AnimatedWidget03>
 // Example 4
 
 class TranslationAnimatedWidget extends AnimatedWidget {
-  const TranslationAnimatedWidget(
-      {Key? key, required Animation<double> animation})
+  const TranslationAnimatedWidget({Key? key, required Animation<double> animation})
       : super(key: key, listenable: animation);
 
   @override
@@ -196,8 +190,7 @@ class AnimatedWidget04 extends StatefulWidget {
   _AnimatedWidget04State createState() => _AnimatedWidget04State();
 }
 
-class _AnimatedWidget04State extends State<AnimatedWidget04>
-    with SingleTickerProviderStateMixin {
+class _AnimatedWidget04State extends State<AnimatedWidget04> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -230,8 +223,7 @@ class _AnimatedWidget04State extends State<AnimatedWidget04>
 // Example 5
 // LogoApp -> AnimatedLogo -> FlutterLogo
 class AnimatedLogo extends AnimatedWidget {
-  const AnimatedLogo({Key? key, required Animation<double> animation})
-      : super(key: key, listenable: animation);
+  const AnimatedLogo({Key? key, required Animation<double> animation}) : super(key: key, listenable: animation);
 
 // Make the Tweens static because they don't change.
   static final _opacityTween = Tween<double>(begin: 0.1, end: 1);
@@ -268,8 +260,7 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller =
-        AnimationController(duration: const Duration(seconds: 2), vsync: this);
+    controller = AnimationController(duration: const Duration(seconds: 2), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
