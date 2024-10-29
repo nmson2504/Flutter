@@ -35,13 +35,10 @@ import 'gesture.dart';
 import 'dismissible.dart';
 import 'valuelistenablebuilder.dart';
 import 'const_constructor.dart';
-<<<<<<< HEAD
 import 'json.dart';
 import 'json01.dart';
 import 'clip_xxx.dart';
-=======
 import 'expansion_panel.dart';
->>>>>>> 2dce8706232aa807b86dad306d77181c87243387
 
 void main() {
   // debugPrintGestureArenaDiagnostics = true;
@@ -54,16 +51,13 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
-<<<<<<< HEAD
 
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => const MyClipXXX(), // Wrap your app
-  ));
+  // runApp(DevicePreview(
+  //   enabled: !kReleaseMode,
+  //   builder: (context) => const MyClipXXX(), // Wrap your app
+  // ));
   // runApp(const MyJson01());
-=======
   runApp(const MyPageView());
->>>>>>> 2dce8706232aa807b86dad306d77181c87243387
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp
 }
