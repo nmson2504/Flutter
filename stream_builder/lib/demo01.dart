@@ -14,7 +14,7 @@ class MyDemoStreamBuilder extends StatelessWidget {
       3: () => const StreamBuilderExampleApp(),
       4: () => const Example4(),
     };
-    int n = 2; // Giá trị n có thể thay đổi
+    int n = 3; // Giá trị n có thể thay đổi
     // Kiểm tra nếu map chứa key n
     Widget bodyWidget;
     if (mapC.containsKey(n)) {
@@ -209,10 +209,18 @@ class StreamBuilderExample extends StatefulWidget {
 }
 
 class _StreamBuilderExampleState extends State<StreamBuilderExample> {
+  /* 
+  Định nghĩa của StreamController như dưới đây được gọi là "lazy initialized stream controller with onListen callback" (StreamController khởi tạo trễ với callback onListen). Cách này có một số đặc điểm quan trọng:
+    Callback onListen: Đây là một chức năng đặc biệt của StreamController. Nó được gọi tự động khi một listener đăng ký (listen) vào stream lần đầu. Điều này giúp thực hiện một số thao tác chuẩn bị hoặc logic bổ sung khi bắt đầu lắng nghe. 
+    Cụ thể ở đây:
+    Khi một listener đầu tiên đăng ký vào _controller.stream, onListen sẽ:
+    - Chờ một khoảng thời gian (theo widget.delay).
+    - Phát giá trị 100 vào stream nếu _controller chưa bị đóng.
+    - Chờ thêm một khoảng thời gian và sau đó đóng _controller.
+    */
   late final StreamController<int> _controller = StreamController<int>(
     onListen: () async {
       // onListen: Đây là một callback được gọi khi có người đăng ký (subscribe) để lắng nghe stream.
-
       await Future<void>.delayed(widget.delay);
 
       if (!_controller.isClosed) {
@@ -245,7 +253,7 @@ class _StreamBuilderExampleState extends State<StreamBuilderExample> {
       child: Container(
         alignment: FractionalOffset.center,
         color: const Color.fromARGB(255, 241, 184, 157),
-        child: BidsStatus(bids: _bids),
+        child: BidsStatus(bids: _bids), // truyền stream _bids đinh nghĩa ở trên
       ),
     );
   }
@@ -264,7 +272,9 @@ class BidsStatus extends StatelessWidget {
     return StreamBuilder<int>(
       stream: bids,
       builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+        // List<Widget> children được sử dụng để lưu trữ danh sách các Widget hiển thị theo từng trạng thái khác nhau của Stream. Những widget này sẽ hiển thị nội dung phù hợp với từng trạng thái của Stream được truyền vào thông qua AsyncSnapshot<int> snapshot.
         List<Widget> children;
+        // Kiểm tra trạng thái snapshot.hasError, nếu ko có thì vào switch (snapshot.connectionState)
         if (snapshot.hasError) {
           children = <Widget>[
             const Icon(
@@ -320,7 +330,7 @@ class BidsStatus extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 16),
-                  child: Text('\$${snapshot.data}'),
+                  child: Text('Active - \$${snapshot.data}'),
                 ),
               ];
             case ConnectionState.done:
@@ -333,7 +343,7 @@ class BidsStatus extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: Text(
-                    snapshot.hasData ? '\$${snapshot.data} (closed)' : '(closed)',
+                    snapshot.hasData ? 'Done - \$${snapshot.data}' : 'Done',
                   ),
                 ),
               ];
@@ -342,7 +352,7 @@ class BidsStatus extends StatelessWidget {
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: children,
+          children: children, // gán List<Widget> children cho UI sau khi đã get data với swith-case ở trên
         );
       },
     );
@@ -372,7 +382,6 @@ class BidsStatus extends StatelessWidget {
 
 Các trạng thái của snapshot được kiểm tra bằng snapshot.connectionState, và đoạn code này xử lý các trường hợp khác nhau dựa trên trạng thái:
 snapshot.hasError:
-
 Mục đích: Kiểm tra xem Stream có gặp lỗi hay không.
 Hành động:
 Nếu có lỗi, UI sẽ hiển thị một biểu tượng lỗi (Icons.error_outline màu đỏ).
@@ -393,7 +402,7 @@ Hành động: Hiển thị biểu tượng check (Icons.check_circle_outline m�
 Mô tả: Khi Stream phát ra dữ liệu và người dùng lắng nghe được, UI sẽ cập nhật với giá trị mới từ snapshot.data.
 ConnectionState.done:
 Mục đích: Kiểm tra xem Stream đã hoàn thành (đã đóng).
-Hành động: Hiển thị biểu tượng thông tin (Icons.info màu xanh) và thông báo rằng Stream đã kết thúc, kèm theo giá trị cuối cùng (nếu có) hoặc hiển thị (closed) nếu không có dữ liệu.
+Hành động: Hiển thị biểu tượng thông tin (Icons.info màu xanh) và thông báo rằng Stream đã kết thúc, kèm theo giá trị cuối cùng (nếu có) hoặc hiển thị (Done) nếu không có dữ liệu.
 Mô tả: Đây là trạng thái cuối cùng khi Stream không còn phát ra dữ liệu nữa và đã kết thúc.
 Diễn giải logic kiểm tra trạng thái:
 Đầu tiên, code kiểm tra xem có lỗi hay không bằng snapshot.hasError. Nếu có lỗi, nó hiển thị thông tin lỗi ngay lập tức.

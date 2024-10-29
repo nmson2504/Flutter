@@ -16,16 +16,23 @@ class CountDownPage extends StatefulWidget {
 class _CountDownPageState extends State<CountDownPage> {
   /* lưu trữ thời gian đếm ngược hiện tại. Biến này được khởi tạo với giá trị mặc định là 0 và sau đó sẽ được cập nhật với giá trị thời gian mà người dùng cung cấp (widget.seconds) thông qua phương thức setTime(). */
   int _start = 0;
-//StreamController này để quản lý dữ liệu thời gian đếm ngược.
+
+  // Cần hai StreamController và hai StreamSubscription để quản lý hai loại luồng dữ liệu khác nhau: thời gian đếm ngược và các sự kiện điều khiển (như bắt đầu, tạm dừng, tiếp tục, đặt lại).
+
+//_timeStreamController & _timeSubscription - để quản lý dữ liệu thời gian đếm ngược.
   final StreamController<int> _timeStreamController = StreamController();
   Stream<int> get _timeStream => _timeStreamController.stream; //  getter để lấy ra stream từ _timeStreamController.
-
-/* StreamSubscription cho phép lắng nghe và theo dõi các giá trị mà stream phát ra. Biến này sẽ lưu trữ tham chiếu đến việc đăng ký lắng nghe timeStream, giúp kiểm soát các thao tác như tạm dừng, tiếp tục, hoặc hủy đăng ký khi không còn cần thiết. */
+/* StreamSubscription cho phép lắng nghe và theo dõi các giá trị mà stream phát ra. Biến này sẽ lưu trữ tham chiếu đến việc đăng ký lắng nghe timeStream, giúp kiểm soát các thao tác với stream như tạm dừng, tiếp tục, hoặc hủy đăng ký khi không còn cần thiết. */
   StreamSubscription? _timeSubscription;
-/* functionSubscription dùng để quản lý việc lắng nghe các sự kiện khác nhau như Start, Pause, Resume, và Reset từ một stream khác (do _functionController phát ra). */
-  late StreamSubscription _functionSubscription;
-// StreamController này để quản lý các sự kiện bắt đầu, tạm dừng, tiếp tục và đặt lại đếm ngược.
+
+// _functionController &  _functionSubscription - quản lý luồng sự kiện điều khiển tương tác của người dùng với bộ đếm như “start”, “pause”, “resume”, và “reset”.
   final StreamController<CountDownEvent> _functionController = StreamController.broadcast();
+/* functionSubscription dùng lắng nghe các sự kiện từ _functionController.stream và thực hiện các thao tác cụ thể khi sự kiện tương ứng xảy ra từ CountDownEvent(Start, Pause, Resume, và Reset). */
+  late StreamSubscription _functionSubscription;
+  /* Có 2 StreamBuilder:
+    -   StreamBuilder<int> - load stream _timeStream
+    -   StreamBuilder thứ 2 - load stream _functionController.stream
+   */
 /* Phương thức setTime cho phép cài đặt thời gian đếm ngược bắt đầu.
 Tham số time là tùy chọn (int?), và nếu nó không được truyền vào, phương thức sẽ sử dụng giá trị mặc định từ widget.seconds (giá trị thời gian được truyền từ widget cha khi khởi tạo CountDownPage). */
   void setTime({int? time}) {
@@ -37,9 +44,8 @@ Tham số time là tùy chọn (int?), và nếu nó không được truyền v�
     super.initState();
     setTime();
 
-    ///việc quản lý các sự kiện bằng stream ở đây
-    ///giúp cho các công việc không thực hiện lại công việc nó đang thực hiện
-    ///bằng hàm distinct()
+// Listen các event tương tác từ người và thực hiện hành động tương ứng
+    /* distinct() loại bỏ các sự kiện lặp lại liên tiếp, chỉ cho phép sự kiện mới thực sự khác biệt với sự kiện trước đó đi qua. Điều này hữu ích vì nó ngăn chặn việc xử lý lại khi người dùng bấm vào cùng một nút nhiều lần liên tiếp mà không thay đổi trạng thái (chẳng hạn, bấm "Pause" nhiều lần trong khi đã tạm dừng). */
     _functionSubscription = _functionController.stream.distinct().listen((event) {
       switch (event) {
         case CountDownEvent.start:
@@ -91,7 +97,8 @@ _timeStreamController.add(event): Truyền giá trị event vào StreamControlle
   }
 
   void _onResume() {
-    if (_timeSubscription?.isPaused ?? false) { // .isPause: Returns a future that handles the [onDone] and [onError] callbacks.
+    if (_timeSubscription?.isPaused ?? false) {
+      // .isPause: Returns a future that handles the [onDone] and [onError] callbacks.
       _timeSubscription?.resume();
     }
   }
@@ -288,6 +295,8 @@ enum CountDownEvent {
   reset,
 }
 
+// extension IntToTime để thêm các phương thức giúp định dạng và trích xuất thông tin từ kiểu int
+// tên gọi "IntToTime" chỉ mang ý nghĩa mô tả ý nghĩa code block chứ ko dùng truy cập trong code
 ///seconds => separate time
 extension IntToTime on int {
   ///lấy thông tin giờ
@@ -331,7 +340,6 @@ extension IntToTime on int {
 }
 
 // áp dụng trong  StreamBuilder<CountDownEvent>(
-
 class Button extends StatelessWidget {
   const Button({
     super.key,
