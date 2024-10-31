@@ -3,15 +3,18 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyAppTween extends StatelessWidget {
+  const MyAppTween({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tweening and Curves'),
+    return MaterialApp(
+      title: 'Tweening and Curves',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Tweening and Curves'),
+        ),
+        body: const Home(),
       ),
-      body: const Home(),
     );
   }
 }
@@ -31,8 +34,7 @@ class Home extends StatelessWidget {
   static final tweenSequence = TweenSequence(
     <TweenSequenceItem<double>>[
       TweenSequenceItem<double>(
-        tween: Tween<double>(begin: 0, end: 1.0)
-            .chain(CurveTween(curve: Curves.easeOut)),
+        tween: Tween<double>(begin: 0, end: 1.0).chain(CurveTween(curve: Curves.easeOut)),
         weight: 40.0,
       ),
       TweenSequenceItem<double>(
@@ -40,8 +42,7 @@ class Home extends StatelessWidget {
         weight: 20.0,
       ),
       TweenSequenceItem<double>(
-        tween: Tween<double>(begin: 1.0, end: 0)
-            .chain(CurveTween(curve: Curves.easeIn)),
+        tween: Tween<double>(begin: 1.0, end: 0).chain(CurveTween(curve: Curves.easeIn)),
         weight: 40.0,
       ),
     ],
@@ -71,17 +72,13 @@ class Home extends StatelessWidget {
       children: <Widget>[
         AnimationAndCurveDemo(
           lable: 'Linear - EaseIn and EaseOut',
-          mainCurve: linearTween
-              .chain(CurveTween(curve: Curves.easeIn))
-              .chain(CurveTween(curve: Curves.easeOut)),
+          mainCurve: linearTween.chain(CurveTween(curve: Curves.easeIn)).chain(CurveTween(curve: Curves.easeOut)),
           duration: const Duration(seconds: 2),
           size: 200,
         ),
         AnimationAndCurveDemo(
           lable: 'Linear - SawTooth',
-          mainCurve: linearTween
-              .chain(CurveTween(curve: Curves.bounceOut))
-              .chain(CurveTween(curve: sawToothCurve)),
+          mainCurve: linearTween.chain(CurveTween(curve: Curves.bounceOut)).chain(CurveTween(curve: sawToothCurve)),
           duration: const Duration(seconds: 7),
           size: 200,
         ),
@@ -216,8 +213,7 @@ class AnimationAndCurveDemo extends StatefulWidget {
   _AnimationAndCurveDemoState createState() => _AnimationAndCurveDemoState();
 }
 
-class _AnimationAndCurveDemoState extends State<AnimationAndCurveDemo>
-    with SingleTickerProviderStateMixin {
+class _AnimationAndCurveDemoState extends State<AnimationAndCurveDemo> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   Animatable<double> get _mainCurve => widget.mainCurve;
@@ -283,8 +279,7 @@ class _AnimationAndCurveDemoState extends State<AnimationAndCurveDemo>
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child:
-              Text(_label, style: Theme.of(context).textTheme.headlineMedium),
+          child: Text(_label, style: Theme.of(context).textTheme.headlineMedium),
         ),
         Expanded(
           child: Padding(
@@ -385,8 +380,7 @@ class GraphPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     _drawBackground(canvas, size);
-    canvas.translate(
-        size.width / 2 - graphSize / 2, size.height / 2 - graphSize / 2);
+    canvas.translate(size.width / 2 - graphSize / 2, size.height / 2 - graphSize / 2);
     _drawBorder(canvas, size);
     canvas.translate(0, graphSize);
     if (comparePath != null) {
@@ -395,20 +389,17 @@ class GraphPainter extends CustomPainter {
     canvas
       ..drawPath(shadowPath, shadowPaint)
       ..drawPath(followPath, followPaint)
-      ..drawCircle(
-          Offset(currentPoint.dx, -currentPoint.dy), 4, currentPointPaint);
+      ..drawCircle(Offset(currentPoint.dx, -currentPoint.dy), 4, currentPointPaint);
   }
 
   void _drawBackground(Canvas canvas, Size size) {
-    canvas.drawRect(
-        Rect.fromLTWH(0, 0, size.width, size.height), backgroundPaint);
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), backgroundPaint);
   }
 
   void _drawBorder(Canvas canvas, Size size) {
     canvas
       ..drawLine(const Offset(0, 0), Offset(0, graphSize), borderPaint)
-      ..drawLine(
-          Offset(0, graphSize), Offset(graphSize, graphSize), borderPaint);
+      ..drawLine(Offset(0, graphSize), Offset(graphSize, graphSize), borderPaint);
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_application_01/card.dart';
@@ -33,6 +35,9 @@ import 'gesture.dart';
 import 'dismissible.dart';
 import 'valuelistenablebuilder.dart';
 import 'const_constructor.dart';
+import 'json.dart';
+import 'json01.dart';
+import 'clip_xxx.dart';
 import 'expansion_panel.dart';
 
 void main() {
@@ -46,6 +51,12 @@ void main() {
   //   DeviceOrientation.landscapeLeft,
   //   DeviceOrientation.landscapeRight
   // ]);
+
+  // runApp(DevicePreview(
+  //   enabled: !kReleaseMode,
+  //   builder: (context) => const MyClipXXX(), // Wrap your app
+  // ));
+  // runApp(const MyJson01());
   runApp(const MyPageView());
   configLoading();
   // runApp(MaterialApp(home: MyAppImpl())); // if class định nghĩa ko có MaterialApp

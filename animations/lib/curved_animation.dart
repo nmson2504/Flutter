@@ -10,8 +10,7 @@ class CurvedAnimation1 extends StatefulWidget {
 }
 
 // TickerProviderStateMixin cung cấp TickerProvider - Ticker cho AnimationController để điều khiển thời gian của animation.
-class _CurvedAnimation1State extends State<CurvedAnimation1>
-    with TickerProviderStateMixin {
+class _CurvedAnimation1State extends State<CurvedAnimation1> with TickerProviderStateMixin {
   late AnimationController _controller1;
   late AnimationController _controller2;
   late Animation<Offset> _animation1;
@@ -31,9 +30,7 @@ class _CurvedAnimation1State extends State<CurvedAnimation1>
       vsync: this,
     );
 
-    _animation1 = Tween<Offset>(
-            begin: const Offset(-1.0, 0.0), end: const Offset(0.0, 0.0))
-        .animate(_controller1)
+    _animation1 = Tween<Offset>(begin: const Offset(-1.0, 0.0), end: const Offset(0.0, 0.0)).animate(_controller1)
       ..addListener(() {
         setState(() {});
       });
@@ -61,8 +58,7 @@ class _CurvedAnimation1State extends State<CurvedAnimation1>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-            'Có & ko CurvedAnimation multi AnimationController Demo'),
+        title: const Text('Có & ko CurvedAnimation multi AnimationController Demo'),
       ),
       body: Center(
         child: Column(
@@ -112,8 +108,7 @@ class CurvedAnimation2 extends StatefulWidget {
   State<CurvedAnimation2> createState() => _CurvedAnimation2State();
 }
 
-class _CurvedAnimation2State extends State<CurvedAnimation2>
-    with SingleTickerProviderStateMixin {
+class _CurvedAnimation2State extends State<CurvedAnimation2> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late CurvedAnimation _curvedAnimation;
 
@@ -159,15 +154,13 @@ class _CurvedAnimation2State extends State<CurvedAnimation2>
 // Example 3 - định nghĩa CurvedAnimation bên ngoài với kiểu CurvedAnimation
 // scale size min - max with GestureDetector - ScaleTransition
 class CurvedAnimation3 extends StatefulWidget {
-  const CurvedAnimation3({Key? key})
-      : super(key: key); // Chú ý phần khai báo key ở đây
+  const CurvedAnimation3({Key? key}) : super(key: key); // Chú ý phần khai báo key ở đây
 
   @override
   State<CurvedAnimation3> createState() => _CurvedAnimation3State();
 }
 
-class _CurvedAnimation3State extends State<CurvedAnimation3>
-    with SingleTickerProviderStateMixin {
+class _CurvedAnimation3State extends State<CurvedAnimation3> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late CurvedAnimation _curvedAnimation;
 
@@ -228,8 +221,7 @@ class _CurvedAnimation3State extends State<CurvedAnimation3>
                   scale: _curvedAnimation,
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: FlutterLogo(
-                        size: 200.0), // Change size for better visibility
+                    child: FlutterLogo(size: 200.0), // Change size for better visibility
                   ),
                 ),
               ),
@@ -242,15 +234,14 @@ class _CurvedAnimation3State extends State<CurvedAnimation3>
 }
 
 // Example 4 - định nghĩa CurvedAnimation bên ngoài với kiểu <double>
-  class CurvedAnimation5 extends StatefulWidget {
+class CurvedAnimation5 extends StatefulWidget {
   const CurvedAnimation5({super.key});
 
   @override
   State<CurvedAnimation5> createState() => _CurvedAnimation5State();
 }
 
-class _CurvedAnimation5State extends State<CurvedAnimation5>
-    with SingleTickerProviderStateMixin {
+class _CurvedAnimation5State extends State<CurvedAnimation5> with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> curve;
   late Animation<int> alpha;
@@ -327,4 +318,3 @@ class _CurvedAnimation5State extends State<CurvedAnimation5>
     );
   }
 }
-
