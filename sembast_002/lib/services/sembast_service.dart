@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,8 +14,7 @@ class SembastService {
   static const String storeName = 'todos';
   static Database? _database; // object Database lưu data
   static SembastService? _instance;
-  static final _store = intMapStoreFactory
-      .store(storeName); //  Tạo Store là một container để lưu trữ các bản ghi.
+  static final _store = intMapStoreFactory.store(storeName); //  Tạo Store là một container để lưu trữ các bản ghi.
   SembastService._();
 /*
 Dấu gạch dưới _ trong Dart thường được sử dụng để đánh dấu các biến hoặc phương thức là "riêng tư" (private), có nghĩa là chúng chỉ có thể được truy cập từ bên trong cùng một thư viện (library) hoặc class.
@@ -66,13 +64,12 @@ Lệnh SembastService._(); là cách bạn gọi đến constructor riêng tư c
 // đối tượng snapshots đại diện cho danh sách các kết quả (hay "snapshot") thu được từ việc truy vấn cơ sở dữ liệu
   static Future<List<Todo>> getAllTodos() async {
     final db = await database; // call Future<Database> get database
-    final snapshots = await _store.find(
-        db); // _store.find(db): Hàm này tìm tất cả các mục trong store và trả về danh sách các RecordSnapshot.
+    final snapshots = await _store
+        .find(db); // _store.find(db): Hàm này tìm tất cả các mục trong store và trả về danh sách các RecordSnapshot.
     // snapshots.map(...): chuyển đổi mỗi snapshot trong danh sách snapshots thành một đối tượng Todo.
     return snapshots.map((snapshot) {
       // Hàm fromMap khởi tạo Todo từ một Map.
-      final todo = Todo.fromMap(snapshot
-          .value); // Chuyển đổi snapshots thành danh sách các đối tượng Todo
+      final todo = Todo.fromMap(snapshot.value); // Chuyển đổi snapshots thành danh sách các đối tượng Todo
       todo.id = snapshot.key;
       return todo;
     }).toList(); //  chuyển đổi kết quả từ một Iterable thành một danh sách (List).
